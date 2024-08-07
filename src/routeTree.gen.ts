@@ -14,9 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as OrdersIndexImport } from './routes/orders/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as LoginAuthImport } from './routes/login/auth'
-import { Route as CustomerOrderImport } from './routes/customer/order'
 
 // Create/Update Routes
 
@@ -32,21 +29,6 @@ const IndexRoute = IndexImport.update({
 
 const OrdersIndexRoute = OrdersIndexImport.update({
   path: '/orders/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginIndexRoute = LoginIndexImport.update({
-  path: '/login/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginAuthRoute = LoginAuthImport.update({
-  path: '/login/auth',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CustomerOrderRoute = CustomerOrderImport.update({
-  path: '/customer/order',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -68,27 +50,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
-    '/customer/order': {
-      id: '/customer/order'
-      path: '/customer/order'
-      fullPath: '/customer/order'
-      preLoaderRoute: typeof CustomerOrderImport
-      parentRoute: typeof rootRoute
-    }
-    '/login/auth': {
-      id: '/login/auth'
-      path: '/login/auth'
-      fullPath: '/login/auth'
-      preLoaderRoute: typeof LoginAuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
     '/orders/': {
       id: '/orders/'
       path: '/orders'
@@ -104,9 +65,6 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
-  CustomerOrderRoute,
-  LoginAuthRoute,
-  LoginIndexRoute,
   OrdersIndexRoute,
 })
 
@@ -120,9 +78,6 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/about",
-        "/customer/order",
-        "/login/auth",
-        "/login/",
         "/orders/"
       ]
     },
@@ -131,15 +86,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/about": {
       "filePath": "about.tsx"
-    },
-    "/customer/order": {
-      "filePath": "customer/order.tsx"
-    },
-    "/login/auth": {
-      "filePath": "login/auth.tsx"
-    },
-    "/login/": {
-      "filePath": "login/index.tsx"
     },
     "/orders/": {
       "filePath": "orders/index.tsx"
