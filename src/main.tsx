@@ -8,6 +8,9 @@ import { RecoilRoot } from "recoil";
 import { ContextProvider as ArcoContextProvider } from "@arco-design/mobile-react";
 import enUS from "@arco-design/mobile-utils/esm/locale/en-US";
 
+import "@arco-design/mobile-react/esm/style";
+// import "@arco-design/web-react/dist/css/index.less"
+
 // Create a new router instance
 const router = createRouter({ routeTree });
 
@@ -23,10 +26,12 @@ const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <RecoilRoot>
-      <ArcoContextProvider locale={enUS}>
-        <RouterProvider router={router} />
-      </ArcoContextProvider>
-    </RecoilRoot>
+    <div className="font-poppins">
+      <RecoilRoot>
+        <ArcoContextProvider locale={enUS}>
+          <RouterProvider router={router} />
+        </ArcoContextProvider>
+      </RecoilRoot>
+    </div>
   );
 }
