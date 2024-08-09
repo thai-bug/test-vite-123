@@ -51,9 +51,15 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@arco-design/web-react': path.resolve(__dirname, 'node_modules/@arco-design/web-react'),
-      '~@arco-design/mobile-utils' : path.resolve(__dirname, 'node_modules/@arco-design/mobile-utils'),
-  
+      "@arco-design/web-react": path.resolve(
+        __dirname,
+        "node_modules/@arco-design/web-react"
+      ),
+      "~@arco-design/mobile-utils": path.resolve(
+        __dirname,
+        "node_modules/@arco-design/mobile-utils"
+      ),
+
       "@": path.resolve(__dirname, "./src/"),
 
       routes: `${path.resolve(__dirname, "./src/routes/")}`,
@@ -61,6 +67,19 @@ export default defineConfig({
       services: `${path.resolve(__dirname, "./src/services/")}`,
 
       utils: `${path.resolve(__dirname, "./src/utils/")}`,
+    },
+  },
+  server: {
+    port: 5177,
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          "@base-font-size": 20,
+        },
+      },
     },
   },
 });

@@ -11,9 +11,27 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PackagesImport } from './routes/packages'
+import { Route as CheckoutImport } from './routes/checkout'
+import { Route as BuyImport } from './routes/buy'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const PackagesRoute = PackagesImport.update({
+  path: '/packages',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckoutRoute = CheckoutImport.update({
+  path: '/checkout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BuyRoute = BuyImport.update({
+  path: '/buy',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -31,12 +49,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/buy': {
+      id: '/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof BuyImport
+      parentRoute: typeof rootRoute
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/packages': {
+      id: '/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof PackagesImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  BuyRoute,
+  CheckoutRoute,
+  PackagesRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -46,11 +90,23 @@ export const routeTree = rootRoute.addChildren({ IndexRoute })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/buy",
+        "/checkout",
+        "/packages"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/buy": {
+      "filePath": "buy.tsx"
+    },
+    "/checkout": {
+      "filePath": "checkout.tsx"
+    },
+    "/packages": {
+      "filePath": "packages.tsx"
     }
   }
 }
