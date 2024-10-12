@@ -1,5 +1,6 @@
 import React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import MainLayout from '@/pages/mainLayout'
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -7,8 +8,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="p-1">
-
-    </div >
+    <div>
+      <MainLayout />
+    </div>
   )
 }

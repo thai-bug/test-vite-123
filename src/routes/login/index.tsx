@@ -1,12 +1,12 @@
-import React from 'react'
-import { Form, Button, Toast } from '@douyinfe/semi-ui';
+import { createFileRoute } from '@tanstack/react-router'
+import LoginPage from '@/pages/login'
 
-const Login = () => {
-  return (
-    <div className='w-full'>
-      abc
+export const Route = createFileRoute('/login/')({
+  component: () => (
+    <div>
+      {' '}
+      <LoginPage />
+      {' '}
     </div>
-  )
-}
-
-export default Login
+  ),
+})
