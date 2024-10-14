@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { createRouter } from "@tanstack/react-router";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { RecoilRoot } from "recoil";
 import App from "./App";
-
-// Create a new router instance
-const router = createRouter({ routeTree });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -16,6 +13,9 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const router = createRouter({ routeTree });
 
 // Render the app
 const rootElement = document.getElementById("root")!;
