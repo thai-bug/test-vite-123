@@ -44,6 +44,7 @@ const LoginPage = () => {
               placeholder={"Email"}
               required
             />
+
             <Form.Input
               field="password"
               label="Password"

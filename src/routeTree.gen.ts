@@ -12,9 +12,9 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as OrdersIndexImport } from './routes/orders/index'
 import { Route as MerchantsIndexImport } from './routes/merchants/index'
 import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as OrdersIndexImport } from './routes/Orders/index'
 import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulfillment/outbound/picking-job/index'
 import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
 import { Route as FulfillmentInboundStorageLabelsIndexImport } from './routes/fulfillment/inbound/storage-labels/index'
@@ -27,6 +27,11 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const OrdersIndexRoute = OrdersIndexImport.update({
+  path: '/orders/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const MerchantsIndexRoute = MerchantsIndexImport.update({
   path: '/merchants/',
   getParentRoute: () => rootRoute,
@@ -34,11 +39,6 @@ const MerchantsIndexRoute = MerchantsIndexImport.update({
 
 const LoginIndexRoute = LoginIndexImport.update({
   path: '/login/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const OrdersIndexRoute = OrdersIndexImport.update({
-  path: '/Orders/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -77,13 +77,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/Orders/': {
-      id: '/Orders/'
-      path: '/Orders'
-      fullPath: '/Orders'
-      preLoaderRoute: typeof OrdersIndexImport
-      parentRoute: typeof rootRoute
-    }
     '/login/': {
       id: '/login/'
       path: '/login'
@@ -96,6 +89,13 @@ declare module '@tanstack/react-router' {
       path: '/merchants'
       fullPath: '/merchants'
       preLoaderRoute: typeof MerchantsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/orders/': {
+      id: '/orders/'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersIndexImport
       parentRoute: typeof rootRoute
     }
     '/fulfillment/inbound/orders/': {
@@ -133,9 +133,9 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/Orders': typeof OrdersIndexRoute
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
+  '/orders': typeof OrdersIndexRoute
   '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
@@ -144,9 +144,9 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Orders': typeof OrdersIndexRoute
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
+  '/orders': typeof OrdersIndexRoute
   '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
@@ -156,9 +156,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/Orders/': typeof OrdersIndexRoute
   '/login/': typeof LoginIndexRoute
   '/merchants/': typeof MerchantsIndexRoute
+  '/orders/': typeof OrdersIndexRoute
   '/fulfillment/inbound/orders/': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels/': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages/': typeof FulfillmentInboundStoragesIndexRoute
@@ -169,9 +169,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/Orders'
     | '/login'
     | '/merchants'
+    | '/orders'
     | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
@@ -179,9 +179,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/Orders'
     | '/login'
     | '/merchants'
+    | '/orders'
     | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
@@ -189,9 +189,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/Orders/'
     | '/login/'
     | '/merchants/'
+    | '/orders/'
     | '/fulfillment/inbound/orders/'
     | '/fulfillment/inbound/storage-labels/'
     | '/fulfillment/inbound/storages/'
@@ -201,9 +201,9 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  OrdersIndexRoute: typeof OrdersIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   MerchantsIndexRoute: typeof MerchantsIndexRoute
+  OrdersIndexRoute: typeof OrdersIndexRoute
   FulfillmentInboundOrdersIndexRoute: typeof FulfillmentInboundOrdersIndexRoute
   FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute
   FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute
@@ -212,9 +212,9 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  OrdersIndexRoute: OrdersIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   MerchantsIndexRoute: MerchantsIndexRoute,
+  OrdersIndexRoute: OrdersIndexRoute,
   FulfillmentInboundOrdersIndexRoute: FulfillmentInboundOrdersIndexRoute,
   FulfillmentInboundStorageLabelsIndexRoute:
     FulfillmentInboundStorageLabelsIndexRoute,
@@ -236,9 +236,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/Orders/",
         "/login/",
         "/merchants/",
+        "/orders/",
         "/fulfillment/inbound/orders/",
         "/fulfillment/inbound/storage-labels/",
         "/fulfillment/inbound/storages/",
@@ -248,14 +248,14 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
-    "/Orders/": {
-      "filePath": "Orders/index.tsx"
-    },
     "/login/": {
       "filePath": "login/index.tsx"
     },
     "/merchants/": {
       "filePath": "merchants/index.tsx"
+    },
+    "/orders/": {
+      "filePath": "orders/index.tsx"
     },
     "/fulfillment/inbound/orders/": {
       "filePath": "fulfillment/inbound/orders/index.tsx"
