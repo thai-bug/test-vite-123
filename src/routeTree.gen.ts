@@ -10,300 +10,222 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-<<<<<<< HEAD
-import { Route as OrdersIndexImport } from './routes/orders/index'
-import { Route as MerchantsIndexImport } from './routes/merchants/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-=======
-import { Route as MerchantsIndexImport } from './routes/merchants/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as OrdersIndexImport } from './routes/Orders/index'
->>>>>>> e3e440c (initial branch feature/login)
-import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulfillment/outbound/picking-job/index'
-import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
-import { Route as FulfillmentInboundStorageLabelsIndexImport } from './routes/fulfillment/inbound/storage-labels/index'
-import { Route as FulfillmentInboundOrdersIndexImport } from './routes/fulfillment/inbound/orders/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as IndexImport } from "./routes/index";
+import { Route as OrdersIndexImport } from "./routes/orders/index";
+import { Route as MerchantsIndexImport } from "./routes/merchants/index";
+import { Route as LoginIndexImport } from "./routes/login/index";
+import { Route as FulfillmentOutboundPickingJobIndexImport } from "./routes/fulfillment/outbound/picking-job/index";
+import { Route as FulfillmentInboundStoragesIndexImport } from "./routes/fulfillment/inbound/storages/index";
+import { Route as FulfillmentInboundStorageLabelsIndexImport } from "./routes/fulfillment/inbound/storage-labels/index";
+import { Route as FulfillmentInboundOrdersIndexImport } from "./routes/fulfillment/inbound/orders/index";
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-<<<<<<< HEAD
 const OrdersIndexRoute = OrdersIndexImport.update({
-  path: '/orders/',
+  path: "/orders/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-=======
->>>>>>> e3e440c (initial branch feature/login)
 const MerchantsIndexRoute = MerchantsIndexImport.update({
-  path: '/merchants/',
+  path: "/merchants/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginIndexRoute = LoginIndexImport.update({
-  path: '/login/',
+  path: "/login/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
-<<<<<<< HEAD
-=======
-const OrdersIndexRoute = OrdersIndexImport.update({
-  path: '/Orders/',
-  getParentRoute: () => rootRoute,
-} as any)
-
->>>>>>> e3e440c (initial branch feature/login)
 const FulfillmentOutboundPickingJobIndexRoute =
   FulfillmentOutboundPickingJobIndexImport.update({
-    path: '/fulfillment/outbound/picking-job/',
+    path: "/fulfillment/outbound/picking-job/",
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
 
 const FulfillmentInboundStoragesIndexRoute =
   FulfillmentInboundStoragesIndexImport.update({
-    path: '/fulfillment/inbound/storages/',
+    path: "/fulfillment/inbound/storages/",
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
 
 const FulfillmentInboundStorageLabelsIndexRoute =
   FulfillmentInboundStorageLabelsIndexImport.update({
-    path: '/fulfillment/inbound/storage-labels/',
+    path: "/fulfillment/inbound/storage-labels/",
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
 
 const FulfillmentInboundOrdersIndexRoute =
   FulfillmentInboundOrdersIndexImport.update({
-    path: '/fulfillment/inbound/orders/',
+    path: "/fulfillment/inbound/orders/",
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-<<<<<<< HEAD
-=======
-    '/Orders/': {
-      id: '/Orders/'
-      path: '/Orders'
-      fullPath: '/Orders'
-      preLoaderRoute: typeof OrdersIndexImport
-      parentRoute: typeof rootRoute
-    }
->>>>>>> e3e440c (initial branch feature/login)
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/merchants/': {
-      id: '/merchants/'
-      path: '/merchants'
-      fullPath: '/merchants'
-      preLoaderRoute: typeof MerchantsIndexImport
-      parentRoute: typeof rootRoute
-    }
-<<<<<<< HEAD
-    '/orders/': {
-      id: '/orders/'
-      path: '/orders'
-      fullPath: '/orders'
-      preLoaderRoute: typeof OrdersIndexImport
-      parentRoute: typeof rootRoute
-    }
-=======
->>>>>>> e3e440c (initial branch feature/login)
-    '/fulfillment/inbound/orders/': {
-      id: '/fulfillment/inbound/orders/'
-      path: '/fulfillment/inbound/orders'
-      fullPath: '/fulfillment/inbound/orders'
-      preLoaderRoute: typeof FulfillmentInboundOrdersIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/fulfillment/inbound/storage-labels/': {
-      id: '/fulfillment/inbound/storage-labels/'
-      path: '/fulfillment/inbound/storage-labels'
-      fullPath: '/fulfillment/inbound/storage-labels'
-      preLoaderRoute: typeof FulfillmentInboundStorageLabelsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/fulfillment/inbound/storages/': {
-      id: '/fulfillment/inbound/storages/'
-      path: '/fulfillment/inbound/storages'
-      fullPath: '/fulfillment/inbound/storages'
-      preLoaderRoute: typeof FulfillmentInboundStoragesIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/fulfillment/outbound/picking-job/': {
-      id: '/fulfillment/outbound/picking-job/'
-      path: '/fulfillment/outbound/picking-job'
-      fullPath: '/fulfillment/outbound/picking-job'
-      preLoaderRoute: typeof FulfillmentOutboundPickingJobIndexImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login/": {
+      id: "/login/";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/merchants/": {
+      id: "/merchants/";
+      path: "/merchants";
+      fullPath: "/merchants";
+      preLoaderRoute: typeof MerchantsIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/orders/": {
+      id: "/orders/";
+      path: "/orders";
+      fullPath: "/orders";
+      preLoaderRoute: typeof OrdersIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/fulfillment/inbound/orders/": {
+      id: "/fulfillment/inbound/orders/";
+      path: "/fulfillment/inbound/orders";
+      fullPath: "/fulfillment/inbound/orders";
+      preLoaderRoute: typeof FulfillmentInboundOrdersIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/fulfillment/inbound/storage-labels/": {
+      id: "/fulfillment/inbound/storage-labels/";
+      path: "/fulfillment/inbound/storage-labels";
+      fullPath: "/fulfillment/inbound/storage-labels";
+      preLoaderRoute: typeof FulfillmentInboundStorageLabelsIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/fulfillment/inbound/storages/": {
+      id: "/fulfillment/inbound/storages/";
+      path: "/fulfillment/inbound/storages";
+      fullPath: "/fulfillment/inbound/storages";
+      preLoaderRoute: typeof FulfillmentInboundStoragesIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/fulfillment/outbound/picking-job/": {
+      id: "/fulfillment/outbound/picking-job/";
+      path: "/fulfillment/outbound/picking-job";
+      fullPath: "/fulfillment/outbound/picking-job";
+      preLoaderRoute: typeof FulfillmentOutboundPickingJobIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-<<<<<<< HEAD
-  '/login': typeof LoginIndexRoute
-  '/merchants': typeof MerchantsIndexRoute
-  '/orders': typeof OrdersIndexRoute
-=======
-  '/Orders': typeof OrdersIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/merchants': typeof MerchantsIndexRoute
->>>>>>> e3e440c (initial branch feature/login)
-  '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
-  '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
-  '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
-  '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
+  "/": typeof IndexRoute;
+  "/login": typeof LoginIndexRoute;
+  "/merchants": typeof MerchantsIndexRoute;
+  "/orders": typeof OrdersIndexRoute;
+  "/fulfillment/inbound/orders": typeof FulfillmentInboundOrdersIndexRoute;
+  "/fulfillment/inbound/storage-labels": typeof FulfillmentInboundStorageLabelsIndexRoute;
+  "/fulfillment/inbound/storages": typeof FulfillmentInboundStoragesIndexRoute;
+  "/fulfillment/outbound/picking-job": typeof FulfillmentOutboundPickingJobIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-<<<<<<< HEAD
-  '/login': typeof LoginIndexRoute
-  '/merchants': typeof MerchantsIndexRoute
-  '/orders': typeof OrdersIndexRoute
-=======
-  '/Orders': typeof OrdersIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/merchants': typeof MerchantsIndexRoute
->>>>>>> e3e440c (initial branch feature/login)
-  '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
-  '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
-  '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
-  '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
+  "/": typeof IndexRoute;
+  "/login": typeof LoginIndexRoute;
+  "/merchants": typeof MerchantsIndexRoute;
+  "/orders": typeof OrdersIndexRoute;
+  "/fulfillment/inbound/orders": typeof FulfillmentInboundOrdersIndexRoute;
+  "/fulfillment/inbound/storage-labels": typeof FulfillmentInboundStorageLabelsIndexRoute;
+  "/fulfillment/inbound/storages": typeof FulfillmentInboundStoragesIndexRoute;
+  "/fulfillment/outbound/picking-job": typeof FulfillmentOutboundPickingJobIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-<<<<<<< HEAD
-  '/login/': typeof LoginIndexRoute
-  '/merchants/': typeof MerchantsIndexRoute
-  '/orders/': typeof OrdersIndexRoute
-=======
-  '/Orders/': typeof OrdersIndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/merchants/': typeof MerchantsIndexRoute
->>>>>>> e3e440c (initial branch feature/login)
-  '/fulfillment/inbound/orders/': typeof FulfillmentInboundOrdersIndexRoute
-  '/fulfillment/inbound/storage-labels/': typeof FulfillmentInboundStorageLabelsIndexRoute
-  '/fulfillment/inbound/storages/': typeof FulfillmentInboundStoragesIndexRoute
-  '/fulfillment/outbound/picking-job/': typeof FulfillmentOutboundPickingJobIndexRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/login/": typeof LoginIndexRoute;
+  "/merchants/": typeof MerchantsIndexRoute;
+  "/orders/": typeof OrdersIndexRoute;
+  "/fulfillment/inbound/orders/": typeof FulfillmentInboundOrdersIndexRoute;
+  "/fulfillment/inbound/storage-labels/": typeof FulfillmentInboundStorageLabelsIndexRoute;
+  "/fulfillment/inbound/storages/": typeof FulfillmentInboundStoragesIndexRoute;
+  "/fulfillment/outbound/picking-job/": typeof FulfillmentOutboundPickingJobIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-<<<<<<< HEAD
-    | '/login'
-    | '/merchants'
-    | '/orders'
-=======
-    | '/Orders'
-    | '/login'
-    | '/merchants'
->>>>>>> e3e440c (initial branch feature/login)
-    | '/fulfillment/inbound/orders'
-    | '/fulfillment/inbound/storage-labels'
-    | '/fulfillment/inbound/storages'
-    | '/fulfillment/outbound/picking-job'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/login"
+    | "/merchants"
+    | "/orders"
+    | "/fulfillment/inbound/orders"
+    | "/fulfillment/inbound/storage-labels"
+    | "/fulfillment/inbound/storages"
+    | "/fulfillment/outbound/picking-job";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-<<<<<<< HEAD
-    | '/login'
-    | '/merchants'
-    | '/orders'
-=======
-    | '/Orders'
-    | '/login'
-    | '/merchants'
->>>>>>> e3e440c (initial branch feature/login)
-    | '/fulfillment/inbound/orders'
-    | '/fulfillment/inbound/storage-labels'
-    | '/fulfillment/inbound/storages'
-    | '/fulfillment/outbound/picking-job'
+    | "/"
+    | "/login"
+    | "/merchants"
+    | "/orders"
+    | "/fulfillment/inbound/orders"
+    | "/fulfillment/inbound/storage-labels"
+    | "/fulfillment/inbound/storages"
+    | "/fulfillment/outbound/picking-job";
   id:
-    | '__root__'
-    | '/'
-<<<<<<< HEAD
-    | '/login/'
-    | '/merchants/'
-    | '/orders/'
-=======
-    | '/Orders/'
-    | '/login/'
-    | '/merchants/'
->>>>>>> e3e440c (initial branch feature/login)
-    | '/fulfillment/inbound/orders/'
-    | '/fulfillment/inbound/storage-labels/'
-    | '/fulfillment/inbound/storages/'
-    | '/fulfillment/outbound/picking-job/'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/login/"
+    | "/merchants/"
+    | "/orders/"
+    | "/fulfillment/inbound/orders/"
+    | "/fulfillment/inbound/storage-labels/"
+    | "/fulfillment/inbound/storages/"
+    | "/fulfillment/outbound/picking-job/";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-<<<<<<< HEAD
-  LoginIndexRoute: typeof LoginIndexRoute
-  MerchantsIndexRoute: typeof MerchantsIndexRoute
-  OrdersIndexRoute: typeof OrdersIndexRoute
-=======
-  OrdersIndexRoute: typeof OrdersIndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
-  MerchantsIndexRoute: typeof MerchantsIndexRoute
->>>>>>> e3e440c (initial branch feature/login)
-  FulfillmentInboundOrdersIndexRoute: typeof FulfillmentInboundOrdersIndexRoute
-  FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute
-  FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute
-  FulfillmentOutboundPickingJobIndexRoute: typeof FulfillmentOutboundPickingJobIndexRoute
+  IndexRoute: typeof IndexRoute;
+  LoginIndexRoute: typeof LoginIndexRoute;
+  MerchantsIndexRoute: typeof MerchantsIndexRoute;
+  OrdersIndexRoute: typeof OrdersIndexRoute;
+  FulfillmentInboundOrdersIndexRoute: typeof FulfillmentInboundOrdersIndexRoute;
+  FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute;
+  FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute;
+  FulfillmentOutboundPickingJobIndexRoute: typeof FulfillmentOutboundPickingJobIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-<<<<<<< HEAD
   LoginIndexRoute: LoginIndexRoute,
   MerchantsIndexRoute: MerchantsIndexRoute,
   OrdersIndexRoute: OrdersIndexRoute,
-=======
-  OrdersIndexRoute: OrdersIndexRoute,
-  LoginIndexRoute: LoginIndexRoute,
-  MerchantsIndexRoute: MerchantsIndexRoute,
->>>>>>> e3e440c (initial branch feature/login)
   FulfillmentInboundOrdersIndexRoute: FulfillmentInboundOrdersIndexRoute,
   FulfillmentInboundStorageLabelsIndexRoute:
     FulfillmentInboundStorageLabelsIndexRoute,
   FulfillmentInboundStoragesIndexRoute: FulfillmentInboundStoragesIndexRoute,
   FulfillmentOutboundPickingJobIndexRoute:
     FulfillmentOutboundPickingJobIndexRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
@@ -314,15 +236,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-<<<<<<< HEAD
         "/login/",
         "/merchants/",
         "/orders/",
-=======
-        "/Orders/",
-        "/login/",
-        "/merchants/",
->>>>>>> e3e440c (initial branch feature/login)
         "/fulfillment/inbound/orders/",
         "/fulfillment/inbound/storage-labels/",
         "/fulfillment/inbound/storages/",
@@ -332,24 +248,15 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
-<<<<<<< HEAD
-=======
-    "/Orders/": {
-      "filePath": "Orders/index.tsx"
-    },
->>>>>>> e3e440c (initial branch feature/login)
     "/login/": {
       "filePath": "login/index.tsx"
     },
     "/merchants/": {
       "filePath": "merchants/index.tsx"
     },
-<<<<<<< HEAD
     "/orders/": {
       "filePath": "orders/index.tsx"
     },
-=======
->>>>>>> e3e440c (initial branch feature/login)
     "/fulfillment/inbound/orders/": {
       "filePath": "fulfillment/inbound/orders/index.tsx"
     },
