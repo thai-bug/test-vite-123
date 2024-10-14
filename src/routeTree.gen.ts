@@ -12,9 +12,15 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+<<<<<<< HEAD
 import { Route as OrdersIndexImport } from './routes/orders/index'
 import { Route as MerchantsIndexImport } from './routes/merchants/index'
 import { Route as LoginIndexImport } from './routes/login/index'
+=======
+import { Route as MerchantsIndexImport } from './routes/merchants/index'
+import { Route as LoginIndexImport } from './routes/login/index'
+import { Route as OrdersIndexImport } from './routes/Orders/index'
+>>>>>>> e3e440c (initial branch feature/login)
 import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulfillment/outbound/picking-job/index'
 import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
 import { Route as FulfillmentInboundStorageLabelsIndexImport } from './routes/fulfillment/inbound/storage-labels/index'
@@ -27,11 +33,14 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+<<<<<<< HEAD
 const OrdersIndexRoute = OrdersIndexImport.update({
   path: '/orders/',
   getParentRoute: () => rootRoute,
 } as any)
 
+=======
+>>>>>>> e3e440c (initial branch feature/login)
 const MerchantsIndexRoute = MerchantsIndexImport.update({
   path: '/merchants/',
   getParentRoute: () => rootRoute,
@@ -42,6 +51,14 @@ const LoginIndexRoute = LoginIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+<<<<<<< HEAD
+=======
+const OrdersIndexRoute = OrdersIndexImport.update({
+  path: '/Orders/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+>>>>>>> e3e440c (initial branch feature/login)
 const FulfillmentOutboundPickingJobIndexRoute =
   FulfillmentOutboundPickingJobIndexImport.update({
     path: '/fulfillment/outbound/picking-job/',
@@ -77,6 +94,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+<<<<<<< HEAD
+=======
+    '/Orders/': {
+      id: '/Orders/'
+      path: '/Orders'
+      fullPath: '/Orders'
+      preLoaderRoute: typeof OrdersIndexImport
+      parentRoute: typeof rootRoute
+    }
+>>>>>>> e3e440c (initial branch feature/login)
     '/login/': {
       id: '/login/'
       path: '/login'
@@ -91,6 +118,7 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MerchantsIndexImport
       parentRoute: typeof rootRoute
     }
+<<<<<<< HEAD
     '/orders/': {
       id: '/orders/'
       path: '/orders'
@@ -98,6 +126,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIndexImport
       parentRoute: typeof rootRoute
     }
+=======
+>>>>>>> e3e440c (initial branch feature/login)
     '/fulfillment/inbound/orders/': {
       id: '/fulfillment/inbound/orders/'
       path: '/fulfillment/inbound/orders'
@@ -133,9 +163,15 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
   '/orders': typeof OrdersIndexRoute
+=======
+  '/Orders': typeof OrdersIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/merchants': typeof MerchantsIndexRoute
+>>>>>>> e3e440c (initial branch feature/login)
   '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
@@ -144,9 +180,15 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
   '/orders': typeof OrdersIndexRoute
+=======
+  '/Orders': typeof OrdersIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/merchants': typeof MerchantsIndexRoute
+>>>>>>> e3e440c (initial branch feature/login)
   '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
@@ -156,9 +198,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/login/': typeof LoginIndexRoute
   '/merchants/': typeof MerchantsIndexRoute
   '/orders/': typeof OrdersIndexRoute
+=======
+  '/Orders/': typeof OrdersIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/merchants/': typeof MerchantsIndexRoute
+>>>>>>> e3e440c (initial branch feature/login)
   '/fulfillment/inbound/orders/': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels/': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages/': typeof FulfillmentInboundStoragesIndexRoute
@@ -169,9 +217,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+<<<<<<< HEAD
     | '/login'
     | '/merchants'
     | '/orders'
+=======
+    | '/Orders'
+    | '/login'
+    | '/merchants'
+>>>>>>> e3e440c (initial branch feature/login)
     | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
@@ -179,9 +233,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+<<<<<<< HEAD
     | '/login'
     | '/merchants'
     | '/orders'
+=======
+    | '/Orders'
+    | '/login'
+    | '/merchants'
+>>>>>>> e3e440c (initial branch feature/login)
     | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
@@ -189,9 +249,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+<<<<<<< HEAD
     | '/login/'
     | '/merchants/'
     | '/orders/'
+=======
+    | '/Orders/'
+    | '/login/'
+    | '/merchants/'
+>>>>>>> e3e440c (initial branch feature/login)
     | '/fulfillment/inbound/orders/'
     | '/fulfillment/inbound/storage-labels/'
     | '/fulfillment/inbound/storages/'
@@ -201,9 +267,15 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+<<<<<<< HEAD
   LoginIndexRoute: typeof LoginIndexRoute
   MerchantsIndexRoute: typeof MerchantsIndexRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
+=======
+  OrdersIndexRoute: typeof OrdersIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  MerchantsIndexRoute: typeof MerchantsIndexRoute
+>>>>>>> e3e440c (initial branch feature/login)
   FulfillmentInboundOrdersIndexRoute: typeof FulfillmentInboundOrdersIndexRoute
   FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute
   FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute
@@ -212,9 +284,15 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+<<<<<<< HEAD
   LoginIndexRoute: LoginIndexRoute,
   MerchantsIndexRoute: MerchantsIndexRoute,
   OrdersIndexRoute: OrdersIndexRoute,
+=======
+  OrdersIndexRoute: OrdersIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  MerchantsIndexRoute: MerchantsIndexRoute,
+>>>>>>> e3e440c (initial branch feature/login)
   FulfillmentInboundOrdersIndexRoute: FulfillmentInboundOrdersIndexRoute,
   FulfillmentInboundStorageLabelsIndexRoute:
     FulfillmentInboundStorageLabelsIndexRoute,
@@ -236,9 +314,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+<<<<<<< HEAD
         "/login/",
         "/merchants/",
         "/orders/",
+=======
+        "/Orders/",
+        "/login/",
+        "/merchants/",
+>>>>>>> e3e440c (initial branch feature/login)
         "/fulfillment/inbound/orders/",
         "/fulfillment/inbound/storage-labels/",
         "/fulfillment/inbound/storages/",
@@ -248,15 +332,24 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+<<<<<<< HEAD
+=======
+    "/Orders/": {
+      "filePath": "Orders/index.tsx"
+    },
+>>>>>>> e3e440c (initial branch feature/login)
     "/login/": {
       "filePath": "login/index.tsx"
     },
     "/merchants/": {
       "filePath": "merchants/index.tsx"
     },
+<<<<<<< HEAD
     "/orders/": {
       "filePath": "orders/index.tsx"
     },
+=======
+>>>>>>> e3e440c (initial branch feature/login)
     "/fulfillment/inbound/orders/": {
       "filePath": "fulfillment/inbound/orders/index.tsx"
     },
