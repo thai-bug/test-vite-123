@@ -1,14 +1,11 @@
-import React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import MainLayout from '@/components/layouts/MainLayout'
+import HomePage from '@/pages'
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: () =>
+    <MainLayout>
+      <HomePage />
+    </MainLayout>
 })
 
-function Index() {
-  return (
-    <div>
-      Mainlayout
-    </div>
-  )
-}

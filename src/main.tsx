@@ -5,7 +5,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { RecoilRoot } from "recoil";
-import HomeLayout from "./pages/mainLayout/index";
+import App from "./App";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -23,9 +23,7 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <RecoilRoot>
-      <HomeLayout>
-        <RouterProvider router={router} />
-      </HomeLayout>
+      <App />
     </RecoilRoot>
   );
 }
