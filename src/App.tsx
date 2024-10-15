@@ -1,5 +1,5 @@
-import { Spin } from "@douyinfe/semi-ui";
-
+import { LocaleProvider, Spin } from "@douyinfe/semi-ui";
+import en_GB from "@douyinfe/semi-ui/lib/es/locale/source/en_GB";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import NotFoundPage from "./pages/errors/404";
@@ -23,7 +23,9 @@ declare module "@tanstack/react-router" {
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <LocaleProvider locale={en_GB}>
+        <RouterProvider router={router} />
+      </LocaleProvider>
     </>
   );
 }
