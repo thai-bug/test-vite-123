@@ -1,4 +1,4 @@
-import RoutesState from "@/states/route.state";
+import { RoutesState } from "@/states/route.state";
 // import { IconHome } from "@douyinfe/semi-icons";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
@@ -16,9 +16,7 @@ function HomePage() {
     ]);
   }, []);
 
-  return <>
-    Home
-  </>;
+  return <>Home</>;
 }
 
 export default HomePage;
