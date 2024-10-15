@@ -28,7 +28,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }: MainLayoutProps) => {
   return (
     <Layout
       style={{ border: "1px solid var(--semi-color-border)" }}
-      className="h-full semi-layout semi-layout-has-sider"
+      className="h-screen semi-layout semi-layout-has-sider"
     >
       <Sidebar backgroundColor="var(--semi-color-bg-1)">
         <Menu

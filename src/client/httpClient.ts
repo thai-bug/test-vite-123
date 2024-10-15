@@ -47,21 +47,16 @@ httpClient.interceptors.response.use(
       case 401:
         if (
           config.url !== "/api/v1/auth/refresh-token" &&
-          config.url !== "/api/v1/auth/sign-in"
+          config.url !== "/api/v1/auth/login"
         ) {
           await refreshToken();
         } else if (config.url === "/api/v1/auth/refresh-token") {
           localStorage.removeItem("refreshToken");
           localStorage.removeItem("accessToken");
           const url = encodeURIComponent(location.href);
-          location.href = `/sign-in?return=${url}`;
+          location.href = `/login?return=${url}`;
         }
         break;
-
-      // case 404:
-      //   location.href = `/404`;
-      //   break;
-
       default:
         break;
     }
