@@ -1,9 +1,7 @@
-import { RouteProps } from "@douyinfe/semi-ui/lib/es/breadcrumb";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { atom } from "recoil";
 
-const RoutesState = atom<RouteProps[]>({
+export const RoutesState = atom<any[]>({
   key: "routes-state",
   default: [],
 });
-
-export default RoutesState;

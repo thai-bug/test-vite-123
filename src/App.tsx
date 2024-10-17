@@ -1,8 +1,10 @@
-import { Spin } from "@douyinfe/semi-ui";
+// import { Spin } from "@douyinfe/semi-ui";
 
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import NotFoundPage from "./pages/errors/404";
+import "./index.css";
+import { Spin } from "antd";
 
 const router = createRouter({
   routeTree,

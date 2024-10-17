@@ -1,145 +1,131 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Layout,
-  Nav,
-  Breadcrumb,
-  Avatar,
-  Dropdown,
-  Divider,
-} from "@douyinfe/semi-ui";
-import { IconQuit } from "@douyinfe/semi-icons"
-import React, { FC, useContext, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import RoutesState from "@/states/route.state";
-import { Link, useMatchRoute } from "@tanstack/react-router";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { MenuItems } from "@/utils/menu";
-
+import React, { useCallback, useEffect } from "react";
+import { UserSwitchOutlined } from "@ant-design/icons";
+import { Layout, Menu, theme } from "antd";
+import { Link, useRouter } from "@tanstack/react-router";
+import useMenu from "@/hooks/useMenu";
+import { useRecoilState } from "recoil";
+import { CollapseStates, OpenKeysStates } from "@/states/menu.state";
+const { Header, Sider, Content } = Layout;
 
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
-const MainLayout: FC<MainLayoutProps> = ({ children }: MainLayoutProps) => {
-  const matchRoute = useMatchRoute();
-  const { Header, Content } = Layout;
-  const routesPath = useRecoilValue(RoutesState);
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const router = useRouter();
+  const currentPath = router.state.location.pathname;
+
+  const { MENU_PATHS } = useMenu();
+
+  const [collapsed, setCollapsed] = useRecoilState(CollapseStates);
+  const [openKeys, setOpenKeys] = useRecoilState(OpenKeysStates);
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const returnSubItems = useCallback((item: any) => {
+    return item?.items?.map((subItem: any) => {
+      if (subItem?.items?.length) {
+        return {
+          key: subItem?.itemKey,
+          label: <Link to={subItem?.path}>{subItem?.text}</Link>,
+          children: returnSubItems(subItem),
+        };
+      }
+      return {
+        key: subItem?.itemKey,
+        label: <Link to={subItem?.path}>{subItem?.text}</Link>,
+      };
+    });
+  }, []);
+
+  const matchSubMenuItem = useCallback((paths: string[], items: any) => {
+    const keys: string[] = [];
+    paths?.forEach((path: any) => {
+      const matched = items?.find((item: any) => item?.itemKey === path);
+      if (matched && matched?.items?.length) {
+        keys.push(matched?.itemKey);
+        matchSubMenuItem(
+          paths?.filter((item: any) => item !== path),
+          matched?.items
+        );
+      }
+    });
+    return keys;
+  }, []);
+
+  useEffect(() => {
+    if (collapsed) {
+      setOpenKeys(() => []);
+      return;
+    }
+    const keys: string[] = [];
+    const splitPaths = currentPath.split("/")?.filter((item) => item);
+
+    splitPaths.forEach((path) => {
+      const matched = MENU_PATHS?.find((item) => item.itemKey === path);
+      if (matched && matched?.items?.length) {
+        keys.push(matched?.itemKey);
+        const tempKeys = matchSubMenuItem(
+          splitPaths?.filter((item) => item !== path),
+          matched?.items
+        );
+
+        keys.push(...tempKeys);
+      }
+    });
+    setOpenKeys(() => [...keys]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matchSubMenuItem, collapsed]);
 
   return (
-    <Layout
-      style={{ border: "1px solid var(--semi-color-border)" }}
-      className="h-screen semi-layout semi-layout-has-sider"
-    >
-      <Sidebar backgroundColor="var(--semi-color-bg-1)">
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider
+        theme="light"
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+      >
+        <div className="demo-logo-vertical" />
         <Menu
-          key={"menu"}
-          menuItemStyles={{
-            subMenuContent: {
-              background: "rgba(var(--semi-grey-1), 1)",
-            },
-            button: {
-              "&:hover": {
-                background: "rgba(var(--semi-grey-2), 1)",
-              },
-            },
-          }}
-        >
-          {MenuItems?.map((item) => {
-            return item?.items?.length ? (
-              <SubMenu
-                key={item.key}
-                defaultOpen={true}
-                label={item.label}
-                icon={item.icon}
-              >
-                {item?.items?.map((subItem) => {
-                  return (
-                    <div key={subItem.key}>
-                      {subItem?.items1 ? (
-                        <SubMenu key={subItem.key} label={subItem.label} icon={subItem.icon}>
-                          {subItem?.items1?.map((a) => (
-                            <MenuItem key={a.key} icon={a.icon} component={<Link to={a.path} />}>
-                              {a.label}
-                            </MenuItem>
-                          ))}
-                        </SubMenu>
-                      )
-                        :
-                        <MenuItem key={subItem.key} icon={subItem.icon}>
-                          <Link to={subItem.label}>{subItem.label}</Link>
-                        </MenuItem>
-                      }
-                    </div>
-                  );
-                })}
-              </SubMenu>
-            ) : (
-              <MenuItem
-                key={item.key}
-                className={
-                  matchRoute({ to: item?.path })
-                    ? "bg-[rgba(var(--semi-grey-3),1)]"
-                    : ""
-                }
-                icon={item.icon}
-                component={<Link to={item?.path as string} />}
-              >
-                {item.label}
-              </MenuItem>
-            );
+          theme="light"
+          onOpenChange={(e) => setOpenKeys((prev) => [...prev, ...e])}
+          defaultSelectedKeys={currentPath?.split("/")?.filter((item) => item)}
+          defaultOpenKeys={[]}
+          openKeys={openKeys}
+          mode="inline"
+          items={MENU_PATHS?.map((item) => {
+            if (item?.items?.length) {
+              return {
+                key: item.itemKey,
+                label: item.text,
+                children: returnSubItems(item),
+                icon: item.icon || <UserSwitchOutlined />,
+                danger: true,
+              };
+            }
+            return {
+              key: item.itemKey,
+              icon: item?.icon || <UserSwitchOutlined />,
+              label: <Link to={item.path}>{item.text}</Link>,
+            };
           })}
-        </Menu>
-      </Sidebar>
+        />
+      </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "var(--semi-color-bg-1)" }}>
-          <div>
-            <Nav mode="horizontal">
-              <Nav.Footer>
-                <Dropdown
-                  trigger={"click"}
-                  position={"bottomLeft"}
-                  render={
-                    <Dropdown.Menu>
-                      <Divider />
-                      <Dropdown.Item
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          window.location.href = "/sign-out";
-                        }}
-                        icon={<IconQuit />}
-                        type="danger"
-                      >
-                        Logout
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  }
-                >
-                  <Avatar color="orange" size="small">
-                    YJ
-                  </Avatar>
-                </Dropdown>
-              </Nav.Footer>
-            </Nav>
-          </div>
-        </Header>
-        <Content
-          className="!overflow-x-visible"
+        <Header
           style={{
-            padding: "24px",
-            backgroundColor: "var(--semi-color-bg-0)",
+            padding: 0,
+            background: colorBgContainer,
+            position: "sticky",
+            top: 0,
           }}
-        >
-          <Breadcrumb
-            style={{
-              marginBottom: "24px",
-            }}
-            routes={routesPath}
-          />
-          <div>{children}</div>
-        </Content>
+        ></Header>
+        <Content className="mx-auto container p-5 2xl:p-0">{children}</Content>
       </Layout>
-    </Layout >
+    </Layout>
   );
 };
 
