@@ -5,7 +5,7 @@ import { getRouteApi, Link } from "@tanstack/react-router";
 import { IQuery } from "@/utils/models";
 import { useEffect, useMemo } from "react";
 import { useSetRecoilState } from "recoil";
-import { Card, Divider, Input, Table } from "antd";
+import { Button, Card, Divider, Input, Table } from "antd";
 import { RoutesState } from "@/states/route.state";
 import { ColumnsType } from "antd/es/table";
 import { dayjs } from "@/utils/dayjs";
@@ -88,6 +88,7 @@ const StorageLabels = () => {
 
   return (
     <Card title="Storage Labels">
+      <Button></Button>
       <div className="flex justify-end">
         <Input.Search
           allowClear

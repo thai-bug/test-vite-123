@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Input, Modal } from '@douyinfe/semi-ui'
+import { Modal, Input } from 'antd';
 import { useMutation } from '@tanstack/react-query';
 import { createStorageLabels } from '@/services/fulfillment/inbound';
 import toast from 'react-hot-toast';
@@ -41,9 +41,7 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
       onOk={() => {
         submitRef?.current?.click()
       }}
-      visible={open}
       confirmLoading={createStorageLabelsMutate.isPending}
-      closeOnEsc={true}
     >
       <br />
       <FormProvider {...methods}>
@@ -58,7 +56,6 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
                   placeholder={"Quantity Storage Labels"}
                   onChange={field.onChange}
                   value={field.value}
-                  validateStatus={error?.message ? "error" : undefined}
                 />
               );
             }}
