@@ -3,7 +3,7 @@ import StorageLabelDetail from "@/pages/fulfillments/Inbound/components/storage-
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/fulfillment/inbound/storage-labels/$code/"
+  "/fulfillment/inbound/storage-labels/$code"
 )({
   component: () => (
     <MainLayout>

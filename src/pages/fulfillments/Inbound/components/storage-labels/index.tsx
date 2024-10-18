@@ -8,6 +8,7 @@ import { useSetRecoilState } from "recoil";
 import { Card, Divider, Input, Table } from "antd";
 import { RoutesState } from "@/states/route.state";
 import { ColumnsType } from "antd/es/table";
+import { dayjs } from "@/utils/dayjs";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/");
 
@@ -41,6 +42,38 @@ const StorageLabels = () => {
         dataIndex: "status",
         key: "status",
       },
+      {
+        title: "Quantity",
+        dataIndex: "quantity",
+        key: "quantity",
+        render: (value) => value || 0,
+      },
+      {
+        title: "Product",
+        dataIndex: "product",
+        key: "product",
+        render: (_, { product }) => (
+          <Link to={`/products/${product?.id}`}>{product?.name}</Link>
+        ),
+      },
+      {
+        title: "Created at",
+        dataIndex: "createdAt",
+        key: "createdAt",
+        render: (value: string) => {
+          return (
+            dayjs(value).isValid() && dayjs(value).format("HH:mm DD/MM/YYYY")
+          );
+        },
+      },
+      {
+        title: "Store",
+        dataIndex: "store",
+        key: "store",
+        render: (_, { store }) => (
+          <Link to={`/stores/${store?.id}`}>{store?.name}</Link>
+        ),
+      },
     ];
   }, []);
 
@@ -51,7 +84,7 @@ const StorageLabels = () => {
         name: "Storage Labels",
       },
     ]);
-  }, []);
+  }, [setRoutesPath]);
 
   return (
     <Card title="Storage Labels">
@@ -76,6 +109,7 @@ const StorageLabels = () => {
       </div>
       <Divider />
       <Table
+        rowKey={"code"}
         columns={columns}
         dataSource={data?.data || []}
         loading={isLoading}

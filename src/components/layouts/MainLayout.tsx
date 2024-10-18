@@ -103,7 +103,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 label: item.text,
                 children: returnSubItems(item),
                 icon: item.icon || <UserSwitchOutlined />,
-                danger: true,
               };
             }
             return {
