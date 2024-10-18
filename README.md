@@ -49,3 +49,5 @@ export default tseslint.config({
 })
 ```
 >>>>>>> 3132b6a492601c93fc603d70ccd204c7c604d224
+=======
+>>>>>>> f0306af6da3e9482771b0e2e8789241f72a7e908
