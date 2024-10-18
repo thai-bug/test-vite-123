@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStorageLabelDetail } from "@/services/fulfillment/inbound";
+import { getStorageLabelDetail } from "@/services/fulfillment/storage-label";
 
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { Card } from "antd";
+import { Card, Collapse } from "antd";
 import { RoutesState } from "@/states/route.state";
+import StorageLabelHistoryTable from "./components/StorageLabelHistoryTable";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/$code");
 
@@ -32,7 +33,13 @@ const StorageLabelDetail = () => {
   }, [code, data, setRoutesPath]);
 
   return (
-    <Card title={`Storage label ${data?.code}`} loading={isLoading}></Card>
+    <Card title={`Storage label ${data?.code}`} loading={isLoading}>
+      <Collapse activeKey={["Histories"]}>
+        <Collapse.Panel key={"Histories"} header="Histories">
+          <StorageLabelHistoryTable storageLabelCode={data?.code} />
+        </Collapse.Panel>
+      </Collapse>
+    </Card>
   );
 };
 

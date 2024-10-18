@@ -15,3 +15,14 @@ export const getStorageLabelDetail = async (id: string) => {
 
   return response.data;
 };
+
+export const getStorageLabelHistories = async (payload: any) => {
+  const response = await httpClient.get(
+    `/api/v1/ffm/inbound/storage-labels/${payload.storageLabelCode}/histories`,
+    {
+      params: payload,
+    }
+  );
+
+  return response.data;
+};
