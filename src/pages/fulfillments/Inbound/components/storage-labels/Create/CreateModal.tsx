@@ -38,6 +38,7 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
     <Modal
       title="Create Storage Labels"
       onCancel={onCancel}
+      open={open}
       onOk={() => {
         submitRef?.current?.click()
       }}
