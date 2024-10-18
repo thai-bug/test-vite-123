@@ -29,7 +29,7 @@ const StorageLabelDetail = () => {
         name: code,
       },
     ]);
-  }, [data]);
+  }, [code, data, setRoutesPath]);
 
   return (
     <Card title={`Storage label ${data?.code}`} loading={isLoading}></Card>

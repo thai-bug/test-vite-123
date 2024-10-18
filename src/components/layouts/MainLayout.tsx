@@ -77,8 +77,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       }
     });
     setOpenKeys(() => [...keys]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [matchSubMenuItem, collapsed]);
+  }, [matchSubMenuItem, collapsed, currentPath, setOpenKeys, MENU_PATHS]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
