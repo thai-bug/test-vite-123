@@ -123,7 +123,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             top: 0,
           }}
         ></Header>
-        <Content className="mx-auto container p-5 2xl:p-0">{children}</Content>
+        <Content className="mx-auto container p-5 2xl:px-0 py-5">
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );

@@ -29,7 +29,7 @@ const StorageLabels = () => {
         key: "code",
         render: (text, record) => (
           <Link
-            to={`/fulfillment/inbound/storage-labels/${record?.id}`}
+            to={`/fulfillment/inbound/storage-labels/${record?.code}`}
             target="_blank"
           >
             {text}
