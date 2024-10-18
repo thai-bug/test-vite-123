@@ -14,3 +14,7 @@ export const getStorageLabelDetail = async (code: string) => {
 
   return response.data;
 };
+
+export const createStorageLabels = async (quantity: number) => {
+  const response = await httpClient.post('/api/v1/ffm/inbound/storage-labels')
+}
