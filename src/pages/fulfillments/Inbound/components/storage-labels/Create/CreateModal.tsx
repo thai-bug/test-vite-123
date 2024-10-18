@@ -49,7 +49,7 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
           <FormController
             name="quantity"
             control={methods.control}
-            render={({ field, fieldState: { error } }) => {
+            render={({ field }) => {
               return (
                 <Input
                   name={field.name}
