@@ -7,7 +7,7 @@ import { useSetRecoilState } from "recoil";
 import { Card } from "antd";
 import { RoutesState } from "@/states/route.state";
 
-const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/$code/");
+const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/$code");
 
 const StorageLabelDetail = () => {
   const { code } = routeApi.useParams();
