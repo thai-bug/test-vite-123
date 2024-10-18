@@ -19,6 +19,7 @@ import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulf
 import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
 import { Route as FulfillmentInboundStorageLabelsIndexImport } from './routes/fulfillment/inbound/storage-labels/index'
 import { Route as FulfillmentInboundOrdersIndexImport } from './routes/fulfillment/inbound/orders/index'
+import { Route as FulfillmentInboundStorageLabelsCodeDetailIndexImport } from './routes/fulfillment/inbound/storage-labels/$code/detail/index'
 
 // Create/Update Routes
 
@@ -63,6 +64,12 @@ const FulfillmentInboundStorageLabelsIndexRoute =
 const FulfillmentInboundOrdersIndexRoute =
   FulfillmentInboundOrdersIndexImport.update({
     path: '/fulfillment/inbound/orders/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const FulfillmentInboundStorageLabelsCodeDetailIndexRoute =
+  FulfillmentInboundStorageLabelsCodeDetailIndexImport.update({
+    path: '/fulfillment/inbound/storage-labels/$code/detail/',
     getParentRoute: () => rootRoute,
   } as any)
 
@@ -126,6 +133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FulfillmentOutboundPickingJobIndexImport
       parentRoute: typeof rootRoute
     }
+    '/fulfillment/inbound/storage-labels/$code/detail/': {
+      id: '/fulfillment/inbound/storage-labels/$code/detail/'
+      path: '/fulfillment/inbound/storage-labels/$code/detail'
+      fullPath: '/fulfillment/inbound/storage-labels/$code/detail'
+      preLoaderRoute: typeof FulfillmentInboundStorageLabelsCodeDetailIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -140,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
+  '/fulfillment/inbound/storage-labels/$code/detail': typeof FulfillmentInboundStorageLabelsCodeDetailIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -151,6 +166,7 @@ export interface FileRoutesByTo {
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
+  '/fulfillment/inbound/storage-labels/$code/detail': typeof FulfillmentInboundStorageLabelsCodeDetailIndexRoute
 }
 
 export interface FileRoutesById {
@@ -163,6 +179,7 @@ export interface FileRoutesById {
   '/fulfillment/inbound/storage-labels/': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages/': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job/': typeof FulfillmentOutboundPickingJobIndexRoute
+  '/fulfillment/inbound/storage-labels/$code/detail/': typeof FulfillmentInboundStorageLabelsCodeDetailIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -176,6 +193,7 @@ export interface FileRouteTypes {
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
     | '/fulfillment/outbound/picking-job'
+    | '/fulfillment/inbound/storage-labels/$code/detail'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -186,6 +204,7 @@ export interface FileRouteTypes {
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
     | '/fulfillment/outbound/picking-job'
+    | '/fulfillment/inbound/storage-labels/$code/detail'
   id:
     | '__root__'
     | '/'
@@ -196,6 +215,7 @@ export interface FileRouteTypes {
     | '/fulfillment/inbound/storage-labels/'
     | '/fulfillment/inbound/storages/'
     | '/fulfillment/outbound/picking-job/'
+    | '/fulfillment/inbound/storage-labels/$code/detail/'
   fileRoutesById: FileRoutesById
 }
 
@@ -208,6 +228,7 @@ export interface RootRouteChildren {
   FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute
   FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute
   FulfillmentOutboundPickingJobIndexRoute: typeof FulfillmentOutboundPickingJobIndexRoute
+  FulfillmentInboundStorageLabelsCodeDetailIndexRoute: typeof FulfillmentInboundStorageLabelsCodeDetailIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -221,6 +242,8 @@ const rootRouteChildren: RootRouteChildren = {
   FulfillmentInboundStoragesIndexRoute: FulfillmentInboundStoragesIndexRoute,
   FulfillmentOutboundPickingJobIndexRoute:
     FulfillmentOutboundPickingJobIndexRoute,
+  FulfillmentInboundStorageLabelsCodeDetailIndexRoute:
+    FulfillmentInboundStorageLabelsCodeDetailIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -242,7 +265,8 @@ export const routeTree = rootRoute
         "/fulfillment/inbound/orders/",
         "/fulfillment/inbound/storage-labels/",
         "/fulfillment/inbound/storages/",
-        "/fulfillment/outbound/picking-job/"
+        "/fulfillment/outbound/picking-job/",
+        "/fulfillment/inbound/storage-labels/$code/detail/"
       ]
     },
     "/": {
@@ -268,6 +292,9 @@ export const routeTree = rootRoute
     },
     "/fulfillment/outbound/picking-job/": {
       "filePath": "fulfillment/outbound/picking-job/index.tsx"
+    },
+    "/fulfillment/inbound/storage-labels/$code/detail/": {
+      "filePath": "fulfillment/inbound/storage-labels/$code/detail/index.tsx"
     }
   }
 }

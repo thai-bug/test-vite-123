@@ -7,6 +7,7 @@ import { routeTree } from "./routeTree.gen";
 import { RecoilRoot } from "recoil";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -26,6 +27,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
+        <Toaster />
         <App />
       </RecoilRoot>
     </QueryClientProvider>
