@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { SnippetsOutlined } from "@ant-design/icons";
+import {
+  ContactsOutlined,
+  HddOutlined,
+  ShopOutlined,
+  SnippetsOutlined,
+} from "@ant-design/icons";
 
 const useMenu = () => {
   const MENU_PATHS: any[] = [
     {
       itemKey: "fulfillment",
       text: "Fulfillment",
+      icon: <HddOutlined />,
       items: [
         {
           itemKey: "inbound",
@@ -41,6 +47,13 @@ const useMenu = () => {
       itemKey: "merchants",
       text: "Merchants",
       path: "/merchants",
+      icon: <ContactsOutlined />,
+    },
+    {
+      itemKey: "stores",
+      text: "Stores",
+      path: "/stores",
+      icon: <ShopOutlined />,
     },
     {
       itemKey: "orders",
