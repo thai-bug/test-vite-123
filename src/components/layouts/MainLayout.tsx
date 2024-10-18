@@ -6,12 +6,23 @@ import useMenu from "@/hooks/useMenu";
 import { useRecoilState } from "recoil";
 import { CollapseStates, OpenKeysStates } from "@/states/menu.state";
 const { Header, Sider, Content } = Layout;
-
+import { useNavigate } from "@tanstack/react-router";
+import { replace } from "lodash";
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken")
+    if (!accessToken)
+      navigate({ to: "/login" })
+  }, [navigate])
+
+
   const router = useRouter();
   const currentPath = router.state.location.pathname;
 
@@ -85,12 +96,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         theme="light"
         collapsible
         collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
+        onCollapse={(value: any) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
         <Menu
           theme="light"
-          onOpenChange={(e) => setOpenKeys((prev) => [...prev, ...e])}
+          onOpenChange={(e: any) => setOpenKeys((prev) => [...prev, ...e])}
           defaultSelectedKeys={currentPath?.split("/")?.filter((item) => item)}
           defaultOpenKeys={[]}
           openKeys={openKeys}

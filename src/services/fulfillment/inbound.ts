@@ -7,9 +7,9 @@ export const getStorageLabels = async (payload: any) => {
   return response.data;
 };
 
-export const getStorageLabelDetail = async (id: string) => {
+export const getStorageLabelDetail = async (code: string) => {
   const response = await httpClient.get(
-    `/api/v1/ffm/inbound/storage-labels/${id}`
+    `/api/v1/ffm/inbound/storage-labels/${code}`
   );
 
   return response.data;
