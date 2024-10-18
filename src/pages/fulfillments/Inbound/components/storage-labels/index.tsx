@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStorageLabels } from "@/services/fulfillment/inbound";
+import { getStorageLabels } from "@/services/fulfillment/storage-label";
 
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { IQuery } from "@/utils/models";

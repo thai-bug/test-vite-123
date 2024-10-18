@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStorageLabelDetail } from "@/services/fulfillment/inbound";
+import { getStorageLabelDetail } from "@/services/fulfillment/storage-label";
 
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { Card, Typography } from "antd";
+import { Card, Collapse } from "antd";
 import { RoutesState } from "@/states/route.state";
+import StorageLabelHistoryTable from "./components/StorageLabelHistoryTable";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/$code");
 
@@ -43,41 +44,16 @@ const StorageLabelDetail = () => {
         name: code,
       },
     ]);
-  }, [data]);
+  }, [code, data, setRoutesPath]);
 
   return (
-    <>
-      <Card title={`Storage label: (${data?.code})`} loading={isLoading}>
-        <div className="grid gap-y-5">
-          <Typography className='text-center'>
-            <div className='text-2xl font-bold'>Storage Labels Detail</div>
-            <div className='text-sm'>( {data?.code} )</div>
-          </Typography>
-          {data ? (
-            <div>
-              {attributes.map((attr, index) => (
-                <div key={index}>
-                  <strong>{attr.label}: </strong>
-                  {typeof attr.value === 'object' && attr.value !== null ? (
-                    <div className='ml-4'>
-                      {Object.keys(attr.value).map((key) => (
-                        <div key={key}>
-                          <strong>{key}:</strong> {attr.value[key] || "N/A"}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <span>{attr.value || "N/A"}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div>Loading...</div>
-          )}
-        </div>
-      </Card>
-    </>
+    <Card title={`Storage label ${data?.code}`} loading={isLoading}>
+      <Collapse activeKey={["Histories"]}>
+        <Collapse.Panel key={"Histories"} header="Histories">
+          <StorageLabelHistoryTable storageLabelCode={data?.code} />
+        </Collapse.Panel>
+      </Collapse>
+    </Card>
   );
 };
 
