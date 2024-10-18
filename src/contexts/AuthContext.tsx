@@ -1,7 +1,7 @@
 import { getUserProfile } from "@/services/auth";
 import { IUser } from "@/utils/model";
-import { Spin } from "@douyinfe/semi-ui";
 import { useQuery } from "@tanstack/react-query";
+import { Spin } from "antd";
 import React, { createContext } from "react";
 
 interface IContextProps {
@@ -11,7 +11,7 @@ interface IContextProps {
 
 export const AuthContext = createContext<IContextProps>({
   user: undefined,
-  getUser: () => { },
+  getUser: () => {},
 });
 
 interface IProps {
