@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Modal, Input } from 'antd';
 import { useMutation } from '@tanstack/react-query';
-import { createStorageLabels } from '@/services/fulfillment/inbound';
+import { createStorageLabels } from '@/services/fulfillment/storage-label';
 import toast from 'react-hot-toast';
 import { FormProvider, useForm } from "react-hook-form";
 import { FormController } from '@/components/helpers/FormController';
@@ -15,7 +15,11 @@ interface CreateModalProps {
 const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) => {
 
   const submitRef = useRef<HTMLButtonElement>(null);
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      quantity: 1
+    }
+  });
 
   const createStorageLabelsMutate = useMutation({
     mutationKey: ['createStorageLabels'],
@@ -31,7 +35,6 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
 
   const onSubmit = (data: any) => {
     Number(createStorageLabelsMutate.mutate(data))
-    console.log(data);
   }
 
   return (

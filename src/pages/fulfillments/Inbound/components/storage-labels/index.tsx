@@ -139,9 +139,7 @@ const StorageLabels = () => {
       />
       <CreateStorageLabelsModal
         open={openCreateModal}
-        onOk={() => {
-          setOpenCreateModal(false);
-        }}
+        onOk={() => setOpenCreateModal(false)}
         onCancel={() => setOpenCreateModal(false)}
       />
     </Card>

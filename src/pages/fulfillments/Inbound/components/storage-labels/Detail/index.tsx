@@ -19,20 +19,6 @@ const StorageLabelDetail = () => {
     queryFn: () => getStorageLabelDetail(code),
   });
 
-  const attributes = data ? [
-    { label: "Code", value: data?.code },
-    { label: "Created at", value: data?.createdAt },
-    { label: "Expired Date", value: data?.expiredDate },
-    { label: "ID", value: data?.id },
-    { label: "Manufactured Date", value: data?.manufacturedDate },
-    { label: "Product ID", value: data?.productId },
-    { label: "Product", value: data?.product },
-    { label: "Storage ID", value: data?.storageId },
-    { label: "Storage", value: data?.storage },
-    { label: "Store ID", value: data?.storeId },
-    { label: "Store", value: data?.store },
-  ] : [];
-
   useEffect(() => {
     setRoutesPath([
       {

@@ -95,12 +95,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         theme="light"
         collapsible
         collapsed={collapsed}
-        onCollapse={(value: any) => setCollapsed(value)}
+        onCollapse={(value) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
         <Menu
           theme="light"
-          onOpenChange={(e: any) => setOpenKeys((prev) => [...prev, ...e])}
+          onOpenChange={(e) => setOpenKeys((prev) => [...prev, ...e])}
           defaultSelectedKeys={currentPath?.split("/")?.filter((item) => item)}
           defaultOpenKeys={[]}
           openKeys={openKeys}
