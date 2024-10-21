@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/services/product/product'
 import { IQuery } from '@/utils/models';
@@ -6,19 +7,15 @@ import Table, { ColumnsType } from 'antd/es/table';
 import { useEffect, useMemo, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { RoutesState } from '@/states/route.state';
-import { Button, Card, Divider, Input, Modal } from 'antd';
+import { Button, Card, Divider, Input } from 'antd';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import DeleteModal from './components/Delete';
 
 
 const routeApi = getRouteApi("/product/");
 
-interface CreateModalProps {
-  open: boolean;
-  onOk: () => void;
-  onCancel: () => void;
-}
 
-const Product = ({ open, onOk, onCancel }: CreateModalProps) => {
+const Product = () => {
   const queries: IQuery = routeApi.useSearch();
   const setRoutesPath = useSetRecoilState(RoutesState);
   const navigate = routeApi.useNavigate()
@@ -57,7 +54,7 @@ const Product = ({ open, onOk, onCancel }: CreateModalProps) => {
       {
         title: "Action",
         key: "action",
-        render: (text, record) => (
+        render: () => (
           <DeleteOutlined
             style={{ cursor: "pointer", color: "red" }}
             onClick={() => setShowModal(true)}
@@ -66,15 +63,6 @@ const Product = ({ open, onOk, onCancel }: CreateModalProps) => {
       }
     ]
   }, [])
-
-  const showWarningModal = () => {
-    Modal.warning({
-      title: 'Warning',
-      content: 'Do you want to delete this product ?',
-      onCancel,
-      onOk
-    });
-  };
 
   useEffect(() => {
     setRoutesPath([
@@ -139,7 +127,11 @@ const Product = ({ open, onOk, onCancel }: CreateModalProps) => {
           current: Number(queries?.page) || 1,
         }}
       />
-      <Modal />
+      <DeleteModal
+        open={showModal}
+        onOk={() => setShowModal(false)}
+        onCancel={() => setShowModal(false)}
+      />
     </Card >
   )
 }
