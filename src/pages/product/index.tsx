@@ -3,19 +3,26 @@ import { getProducts } from '@/services/product/product'
 import { IQuery } from '@/utils/models';
 import { getRouteApi, Link } from '@tanstack/react-router';
 import Table, { ColumnsType } from 'antd/es/table';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { RoutesState } from '@/states/route.state';
-import { Button, Card, Divider, Input } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Button, Card, Divider, Input, Modal } from 'antd';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 
 const routeApi = getRouteApi("/product/");
 
-const Product = () => {
+interface CreateModalProps {
+  open: boolean;
+  onOk: () => void;
+  onCancel: () => void;
+}
+
+const Product = ({ open, onOk, onCancel }: CreateModalProps) => {
   const queries: IQuery = routeApi.useSearch();
   const setRoutesPath = useSetRecoilState(RoutesState);
   const navigate = routeApi.useNavigate()
+  const [showModal, setShowModal] = useState(false)
 
   const columns: ColumnsType = useMemo(() => {
     return [
@@ -46,9 +53,28 @@ const Product = () => {
         title: "Weight (Kg)",
         dataIndex: "weight",
         key: "weight"
+      },
+      {
+        title: "Action",
+        key: "action",
+        render: (text, record) => (
+          <DeleteOutlined
+            style={{ cursor: "pointer", color: "red" }}
+            onClick={() => setShowModal(true)}
+          />
+        )
       }
     ]
   }, [])
+
+  const showWarningModal = () => {
+    Modal.warning({
+      title: 'Warning',
+      content: 'Do you want to delete this product ?',
+      onCancel,
+      onOk
+    });
+  };
 
   useEffect(() => {
     setRoutesPath([
@@ -64,18 +90,14 @@ const Product = () => {
     queryFn: () => getProducts(queries)
   })
 
-  console.log(data);
-
-
   return (
     <Card title="Product">
       <div className='flex justify-between items-center w-full'>
-        <Button
-          icon={<PlusOutlined />}
-          onClick={() => alert("Z")}
-        >
-          Create Product
-        </Button>
+        <Link to='/product/create'>
+          <Button icon={<PlusOutlined />}>
+            Create Product
+          </Button>
+        </Link>
         <Input.Search
           allowClear
           size="large"
@@ -96,6 +118,7 @@ const Product = () => {
       </div>
       <Divider />
       <Table
+        className='text-center'
         rowKey={"id"}
         columns={columns}
         dataSource={data?.data || []}
@@ -116,7 +139,8 @@ const Product = () => {
           current: Number(queries?.page) || 1,
         }}
       />
-    </Card>
+      <Modal />
+    </Card >
   )
 }
 
