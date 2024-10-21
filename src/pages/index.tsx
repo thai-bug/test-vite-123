@@ -11,10 +11,9 @@ function HomePage() {
       {
         path: "/",
         name: "Home",
-        // icon: <IconHome />,
       },
     ]);
-  }, []);
+  }, [setRoutesPath]);
 
   return <>Home</>;
 }

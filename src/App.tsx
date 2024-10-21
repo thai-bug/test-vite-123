@@ -4,6 +4,7 @@ import NotFoundPage from "./pages/errors/404";
 import "./index.css";
 import { Spin } from "antd";
 
+
 const router = createRouter({
   routeTree,
   defaultNotFoundComponent: NotFoundPage,
