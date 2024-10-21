@@ -3,18 +3,21 @@ import { getStorageLabels } from "@/services/fulfillment/storage-label";
 
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { IQuery } from "@/utils/models";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { Card, Divider, Input, Table } from "antd";
+import { Button, Card, Divider, Input, Table } from "antd";
 import { RoutesState } from "@/states/route.state";
 import { ColumnsType } from "antd/es/table";
 import { dayjs } from "@/utils/dayjs";
+import { PlusOutlined } from "@ant-design/icons";
+import CreateStorageLabelsModal from "./Create/CreateModal";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/");
 
 const StorageLabels = () => {
   const queries: IQuery = routeApi.useSearch();
   const navigate = routeApi.useNavigate();
+  const [openCreateModal, setOpenCreateModal] = useState(false)
   const setRoutesPath = useSetRecoilState(RoutesState);
 
   const { data, isLoading } = useQuery({
@@ -88,6 +91,11 @@ const StorageLabels = () => {
 
   return (
     <Card title="Storage Labels">
+      <div>
+        <Button onClick={() => setOpenCreateModal(true)} icon={<PlusOutlined />}>
+          Create Storage Labels
+        </Button>
+      </div>
       <div className="flex justify-end">
         <Input.Search
           allowClear
@@ -128,6 +136,11 @@ const StorageLabels = () => {
           showSizeChanger: true,
           current: Number(queries?.page) || 1,
         }}
+      />
+      <CreateStorageLabelsModal
+        open={openCreateModal}
+        onOk={() => setOpenCreateModal(false)}
+        onCancel={() => setOpenCreateModal(false)}
       />
     </Card>
   );
