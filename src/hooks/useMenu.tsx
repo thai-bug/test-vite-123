@@ -1,6 +1,7 @@
 import {
   ContactsOutlined,
   HddOutlined,
+  ProductOutlined,
   ShopOutlined,
   SnippetsOutlined,
 } from "@ant-design/icons";
@@ -54,6 +55,12 @@ const useMenu = () => {
         text: "Stores",
         path: "/stores",
         icon: <ShopOutlined />,
+      },
+      {
+        itemKey: "product",
+        text: "Product",
+        path: "/product",
+        icon: <ProductOutlined />,
       },
       {
         itemKey: "orders",
