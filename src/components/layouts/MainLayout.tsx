@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useEffect } from "react";
 import { UserSwitchOutlined } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
@@ -7,21 +8,17 @@ import { useRecoilState } from "recoil";
 import { CollapseStates, OpenKeysStates } from "@/states/menu.state";
 const { Header, Sider, Content } = Layout;
 import { useNavigate } from "@tanstack/react-router";
-import { replace } from "lodash";
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken")
-    if (!accessToken)
-      navigate({ to: "/login" })
-  }, [navigate])
-
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) navigate({ to: "/login" });
+  }, [navigate]);
 
   const router = useRouter();
   const currentPath = router.state.location.pathname;

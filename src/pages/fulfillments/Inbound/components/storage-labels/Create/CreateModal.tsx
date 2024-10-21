@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef } from 'react'
-import { Modal, Input } from 'antd';
-import { useMutation } from '@tanstack/react-query';
-import { createStorageLabels } from '@/services/fulfillment/storage-label';
-import toast from 'react-hot-toast';
+import { useRef } from "react";
+import { Modal, Input } from "antd";
+import { useMutation } from "@tanstack/react-query";
+import { createStorageLabels } from "@/services/fulfillment/storage-label";
+import toast from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormController } from '@/components/helpers/FormController';
+import { FormController } from "@/components/helpers/FormController";
 
 interface CreateModalProps {
   open: boolean;
@@ -13,30 +13,33 @@ interface CreateModalProps {
   onCancel: () => void;
 }
 
-const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) => {
-
+const CreateStorageLabelsModal = ({
+  open,
+  onOk,
+  onCancel,
+}: CreateModalProps) => {
   const submitRef = useRef<HTMLButtonElement>(null);
   const methods = useForm({
     defaultValues: {
-      quantity: 1
-    }
+      quantity: 1,
+    },
   });
 
   const createStorageLabelsMutate = useMutation({
-    mutationKey: ['createStorageLabels'],
+    mutationKey: ["createStorageLabels"],
     mutationFn: createStorageLabels,
     onSuccess: () => {
       onOk?.();
-      toast.success("Create Storage labels success !")
+      toast.success("Create Storage labels success !");
     },
     onError: () => {
-      toast.error("Create Storage labels failed !")
-    }
-  })
+      toast.error("Create Storage labels failed !");
+    },
+  });
 
   const onSubmit = (data: any) => {
-    createStorageLabelsMutate.mutate(data)
-  }
+    createStorageLabelsMutate.mutate(data);
+  };
 
   return (
     <Modal
@@ -44,13 +47,13 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
       onCancel={onCancel}
       open={open}
       onOk={() => {
-        submitRef?.current?.click()
+        submitRef?.current?.click();
       }}
       confirmLoading={createStorageLabelsMutate.isPending}
     >
       <br />
       <FormProvider {...methods}>
-        <form autoComplete='off' onSubmit={methods.handleSubmit(onSubmit)}>
+        <form autoComplete="off" onSubmit={methods.handleSubmit(onSubmit)}>
           <FormController
             name="quantity"
             control={methods.control}
@@ -75,7 +78,7 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
         </form>
       </FormProvider>
     </Modal>
-  )
-}
+  );
+};
 
-export default CreateStorageLabelsModal
+export default CreateStorageLabelsModal;
