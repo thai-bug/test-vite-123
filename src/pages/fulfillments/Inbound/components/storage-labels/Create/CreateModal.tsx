@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRef } from 'react'
 import { Modal, Input } from 'antd';
 import { useMutation } from '@tanstack/react-query';
 import { createStorageLabels } from '@/services/fulfillment/storage-label';
@@ -34,7 +35,7 @@ const CreateStorageLabelsModal = ({ open, onOk, onCancel }: CreateModalProps) =>
   })
 
   const onSubmit = (data: any) => {
-    Number(createStorageLabelsMutate.mutate(data))
+    createStorageLabelsMutate.mutate(data)
   }
 
   return (
