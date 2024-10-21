@@ -24,6 +24,7 @@ import { Route as OrdersIdImport } from './routes/orders/$id'
 import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulfillment/outbound/picking-job/index'
 import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
 import { Route as FulfillmentInboundStorageLabelsIndexImport } from './routes/fulfillment/inbound/storage-labels/index'
+import { Route as FulfillmentInboundOrdersIndexImport } from './routes/fulfillment/inbound/orders/index'
 import { Route as FulfillmentInboundStorageLabelsCodeImport } from './routes/fulfillment/inbound/storage-labels/$code'
 
 // Create/Update Routes
@@ -93,6 +94,12 @@ const FulfillmentInboundStoragesIndexRoute =
 const FulfillmentInboundStorageLabelsIndexRoute =
   FulfillmentInboundStorageLabelsIndexImport.update({
     path: '/fulfillment/inbound/storage-labels/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const FulfillmentInboundOrdersIndexRoute =
+  FulfillmentInboundOrdersIndexImport.update({
+    path: '/fulfillment/inbound/orders/',
     getParentRoute: () => rootRoute,
   } as any)
 
@@ -183,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FulfillmentInboundStorageLabelsCodeImport
       parentRoute: typeof rootRoute
     }
+    '/fulfillment/inbound/orders/': {
+      id: '/fulfillment/inbound/orders/'
+      path: '/fulfillment/inbound/orders'
+      fullPath: '/fulfillment/inbound/orders'
+      preLoaderRoute: typeof FulfillmentInboundOrdersIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/fulfillment/inbound/storage-labels/': {
       id: '/fulfillment/inbound/storage-labels/'
       path: '/fulfillment/inbound/storage-labels'
@@ -221,6 +235,7 @@ export interface FileRoutesByFullPath {
   '/product': typeof ProductIndexRoute
   '/stores': typeof StoresIndexRoute
   '/fulfillment/inbound/storage-labels/$code': typeof FulfillmentInboundStorageLabelsCodeRoute
+  '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
@@ -238,6 +253,7 @@ export interface FileRoutesByTo {
   '/product': typeof ProductIndexRoute
   '/stores': typeof StoresIndexRoute
   '/fulfillment/inbound/storage-labels/$code': typeof FulfillmentInboundStorageLabelsCodeRoute
+  '/fulfillment/inbound/orders': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job': typeof FulfillmentOutboundPickingJobIndexRoute
@@ -256,6 +272,7 @@ export interface FileRoutesById {
   '/product/': typeof ProductIndexRoute
   '/stores/': typeof StoresIndexRoute
   '/fulfillment/inbound/storage-labels/$code': typeof FulfillmentInboundStorageLabelsCodeRoute
+  '/fulfillment/inbound/orders/': typeof FulfillmentInboundOrdersIndexRoute
   '/fulfillment/inbound/storage-labels/': typeof FulfillmentInboundStorageLabelsIndexRoute
   '/fulfillment/inbound/storages/': typeof FulfillmentInboundStoragesIndexRoute
   '/fulfillment/outbound/picking-job/': typeof FulfillmentOutboundPickingJobIndexRoute
@@ -275,6 +292,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/stores'
     | '/fulfillment/inbound/storage-labels/$code'
+    | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
     | '/fulfillment/outbound/picking-job'
@@ -291,6 +309,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/stores'
     | '/fulfillment/inbound/storage-labels/$code'
+    | '/fulfillment/inbound/orders'
     | '/fulfillment/inbound/storage-labels'
     | '/fulfillment/inbound/storages'
     | '/fulfillment/outbound/picking-job'
@@ -307,6 +326,7 @@ export interface FileRouteTypes {
     | '/product/'
     | '/stores/'
     | '/fulfillment/inbound/storage-labels/$code'
+    | '/fulfillment/inbound/orders/'
     | '/fulfillment/inbound/storage-labels/'
     | '/fulfillment/inbound/storages/'
     | '/fulfillment/outbound/picking-job/'
@@ -325,6 +345,7 @@ export interface RootRouteChildren {
   ProductIndexRoute: typeof ProductIndexRoute
   StoresIndexRoute: typeof StoresIndexRoute
   FulfillmentInboundStorageLabelsCodeRoute: typeof FulfillmentInboundStorageLabelsCodeRoute
+  FulfillmentInboundOrdersIndexRoute: typeof FulfillmentInboundOrdersIndexRoute
   FulfillmentInboundStorageLabelsIndexRoute: typeof FulfillmentInboundStorageLabelsIndexRoute
   FulfillmentInboundStoragesIndexRoute: typeof FulfillmentInboundStoragesIndexRoute
   FulfillmentOutboundPickingJobIndexRoute: typeof FulfillmentOutboundPickingJobIndexRoute
@@ -343,6 +364,7 @@ const rootRouteChildren: RootRouteChildren = {
   StoresIndexRoute: StoresIndexRoute,
   FulfillmentInboundStorageLabelsCodeRoute:
     FulfillmentInboundStorageLabelsCodeRoute,
+  FulfillmentInboundOrdersIndexRoute: FulfillmentInboundOrdersIndexRoute,
   FulfillmentInboundStorageLabelsIndexRoute:
     FulfillmentInboundStorageLabelsIndexRoute,
   FulfillmentInboundStoragesIndexRoute: FulfillmentInboundStoragesIndexRoute,
@@ -373,6 +395,7 @@ export const routeTree = rootRoute
         "/product/",
         "/stores/",
         "/fulfillment/inbound/storage-labels/$code",
+        "/fulfillment/inbound/orders/",
         "/fulfillment/inbound/storage-labels/",
         "/fulfillment/inbound/storages/",
         "/fulfillment/outbound/picking-job/"
@@ -410,6 +433,9 @@ export const routeTree = rootRoute
     },
     "/fulfillment/inbound/storage-labels/$code": {
       "filePath": "fulfillment/inbound/storage-labels/$code.tsx"
+    },
+    "/fulfillment/inbound/orders/": {
+      "filePath": "fulfillment/inbound/orders/index.tsx"
     },
     "/fulfillment/inbound/storage-labels/": {
       "filePath": "fulfillment/inbound/storage-labels/index.tsx"

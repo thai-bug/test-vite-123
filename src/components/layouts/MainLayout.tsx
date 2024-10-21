@@ -7,12 +7,19 @@ import useMenu from "@/hooks/useMenu";
 import { useRecoilState } from "recoil";
 import { CollapseStates, OpenKeysStates } from "@/states/menu.state";
 const { Header, Sider, Content } = Layout;
-
+import { useNavigate } from "@tanstack/react-router";
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) navigate({ to: "/login" });
+  }, [navigate]);
+
   const router = useRouter();
   const currentPath = router.state.location.pathname;
 

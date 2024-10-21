@@ -71,7 +71,6 @@ const useMenu = () => {
     ],
     []
   );
-
   return { MENU_PATHS };
 };
 
