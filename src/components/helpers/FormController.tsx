@@ -11,11 +11,11 @@ import {
 interface FormControllerProps {
   control: any;
   rules?:
-  | Omit<
-    RegisterOptions<FieldValues, string>,
-    "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled"
-  >
-  | undefined;
+    | Omit<
+        RegisterOptions<FieldValues, string>,
+        "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled"
+      >
+    | undefined;
   render: (fields?: any) => any;
   name: string;
   defaultValue?: any;
@@ -29,8 +29,9 @@ export const FormController: FC<FormControllerProps> = ({
   defaultValue,
 }) => {
   const { getFieldState } = useFormContext();
+  console.log("🚀 ~ getFieldState:", getFieldState);
 
-  const { error } = getFieldState(name)
+  const { error } = getFieldState(name);
 
   return (
     <>
