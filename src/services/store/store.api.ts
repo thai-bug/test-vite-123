@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpClient from "@/client/httpClient";
 
-export const getAllStores = async () => {
-  const response = await httpClient.get("/api/v1/stores");
+export const getStores = async (payload: any) => {
+  const response = await httpClient.get("/api/v1/stores", {
+    params: payload,
+  });
+
   return response.data;
 };
 

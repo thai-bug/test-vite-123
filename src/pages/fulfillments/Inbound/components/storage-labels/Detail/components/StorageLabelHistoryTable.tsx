@@ -1,4 +1,8 @@
-import { getStorageLabelHistories } from "@/services/fulfillment/storage-label";
+import { getStorageLabelHistories } from "@/services/storage-label/storage-label.api";
+import {
+  IStorageLabel,
+  IStorageLabelHistory,
+} from "@/services/storage-label/storage-label.type";
 import { dayjs } from "@/utils/dayjs";
 import { useQuery } from "@tanstack/react-query";
 import { Table, Typography } from "antd";
@@ -6,22 +10,25 @@ import { ColumnsType } from "antd/es/table";
 import React, { FC, useMemo } from "react";
 
 interface StorageLabelHistoryTableProps {
-  storageLabelCode?: string;
+  storageLabel?: IStorageLabel;
 }
 
 const StorageLabelHistoryTable: FC<StorageLabelHistoryTableProps> = ({
-  storageLabelCode,
+  storageLabel,
 }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["storageLabelHistory", storageLabelCode, currentPage],
+  const { data, isLoading } = useQuery<{
+    data: IStorageLabelHistory[];
+    total: number;
+  }>({
+    queryKey: ["storageLabelHistory", storageLabel?.id, currentPage],
     queryFn: () =>
       getStorageLabelHistories({
-        storageLabelCode,
+        storageLabelId: storageLabel?.id,
         page: currentPage,
       }),
-    enabled: !!storageLabelCode,
+    enabled: !!storageLabel?.id,
   });
 
   const columns: ColumnsType = useMemo(() => {
@@ -61,7 +68,7 @@ const StorageLabelHistoryTable: FC<StorageLabelHistoryTableProps> = ({
     <Table
       title={() => (
         <Typography.Title level={5}>
-          Storage label histories of {storageLabelCode}
+          Storage label histories of {storageLabel?.code}
         </Typography.Title>
       )}
       loading={isLoading}

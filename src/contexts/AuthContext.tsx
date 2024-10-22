@@ -1,5 +1,5 @@
 import { getUserProfile } from "@/services/auth";
-import { IUser } from "@/utils/model";
+import { IUser } from "@/utils/models";
 import { useQuery } from "@tanstack/react-query";
 import { Spin } from "antd";
 import React, { createContext } from "react";

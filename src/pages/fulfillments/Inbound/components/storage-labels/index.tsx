@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStorageLabels } from "@/services/fulfillment/storage-label";
+import { getStorageLabels } from "@/services/storage-label/storage-label.api";
 
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { IQuery } from "@/utils/models";
@@ -10,17 +10,17 @@ import { RoutesState } from "@/states/route.state";
 import { ColumnsType } from "antd/es/table";
 import { dayjs } from "@/utils/dayjs";
 import { PlusOutlined } from "@ant-design/icons";
-import CreateStorageLabelsModal from "./Create/CreateModal";
+import CreateStorageLabelsModal from "./components/CreateModal";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/");
 
 const StorageLabels = () => {
   const queries: IQuery = routeApi.useSearch();
   const navigate = routeApi.useNavigate();
-  const [openCreateModal, setOpenCreateModal] = useState(false)
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   const setRoutesPath = useSetRecoilState(RoutesState);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["storageLabels", queries],
     queryFn: () => getStorageLabels(queries),
   });
@@ -92,7 +92,10 @@ const StorageLabels = () => {
   return (
     <Card title="Storage Labels">
       <div>
-        <Button onClick={() => setOpenCreateModal(true)} icon={<PlusOutlined />}>
+        <Button
+          onClick={() => setOpenCreateModal(true)}
+          icon={<PlusOutlined />}
+        >
           Create Storage Labels
         </Button>
       </div>
@@ -139,7 +142,10 @@ const StorageLabels = () => {
       />
       <CreateStorageLabelsModal
         open={openCreateModal}
-        onOk={() => setOpenCreateModal(false)}
+        onOk={() => {
+          setOpenCreateModal(false);
+          refetch();
+        }}
         onCancel={() => setOpenCreateModal(false)}
       />
     </Card>
