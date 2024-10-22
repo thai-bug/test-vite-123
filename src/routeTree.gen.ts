@@ -17,7 +17,7 @@ import { Route as ProductIndexImport } from './routes/product/index'
 import { Route as OrdersIndexImport } from './routes/orders/index'
 import { Route as MerchantsIndexImport } from './routes/merchants/index'
 import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as StoresIdImport } from './routes/stores/$id'
+import { Route as StoresSlugImport } from './routes/stores/$slug'
 import { Route as OrdersIdImport } from './routes/orders/$id'
 import { Route as FulfillmentOutboundPickingJobIndexImport } from './routes/fulfillment/outbound/picking-job/index'
 import { Route as FulfillmentInboundStoragesIndexImport } from './routes/fulfillment/inbound/storages/index'
@@ -57,8 +57,8 @@ const LoginIndexRoute = LoginIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const StoresIdRoute = StoresIdImport.update({
-  path: '/stores/$id',
+const StoresSlugRoute = StoresSlugImport.update({
+  path: '/stores/$slug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -115,11 +115,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIdImport
       parentRoute: typeof rootRoute
     }
-    '/stores/$id': {
-      id: '/stores/$id'
-      path: '/stores/$id'
-      fullPath: '/stores/$id'
-      preLoaderRoute: typeof StoresIdImport
+    '/stores/$slug': {
+      id: '/stores/$slug'
+      path: '/stores/$slug'
+      fullPath: '/stores/$slug'
+      preLoaderRoute: typeof StoresSlugImport
       parentRoute: typeof rootRoute
     }
     '/login/': {
@@ -200,7 +200,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/orders/$id': typeof OrdersIdRoute
-  '/stores/$id': typeof StoresIdRoute
+  '/stores/$slug': typeof StoresSlugRoute
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
   '/orders': typeof OrdersIndexRoute
@@ -216,7 +216,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/orders/$id': typeof OrdersIdRoute
-  '/stores/$id': typeof StoresIdRoute
+  '/stores/$slug': typeof StoresSlugRoute
   '/login': typeof LoginIndexRoute
   '/merchants': typeof MerchantsIndexRoute
   '/orders': typeof OrdersIndexRoute
@@ -233,7 +233,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/orders/$id': typeof OrdersIdRoute
-  '/stores/$id': typeof StoresIdRoute
+  '/stores/$slug': typeof StoresSlugRoute
   '/login/': typeof LoginIndexRoute
   '/merchants/': typeof MerchantsIndexRoute
   '/orders/': typeof OrdersIndexRoute
@@ -251,7 +251,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/orders/$id'
-    | '/stores/$id'
+    | '/stores/$slug'
     | '/login'
     | '/merchants'
     | '/orders'
@@ -266,7 +266,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/orders/$id'
-    | '/stores/$id'
+    | '/stores/$slug'
     | '/login'
     | '/merchants'
     | '/orders'
@@ -281,7 +281,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/orders/$id'
-    | '/stores/$id'
+    | '/stores/$slug'
     | '/login/'
     | '/merchants/'
     | '/orders/'
@@ -298,7 +298,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   OrdersIdRoute: typeof OrdersIdRoute
-  StoresIdRoute: typeof StoresIdRoute
+  StoresSlugRoute: typeof StoresSlugRoute
   LoginIndexRoute: typeof LoginIndexRoute
   MerchantsIndexRoute: typeof MerchantsIndexRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -314,7 +314,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   OrdersIdRoute: OrdersIdRoute,
-  StoresIdRoute: StoresIdRoute,
+  StoresSlugRoute: StoresSlugRoute,
   LoginIndexRoute: LoginIndexRoute,
   MerchantsIndexRoute: MerchantsIndexRoute,
   OrdersIndexRoute: OrdersIndexRoute,
@@ -344,7 +344,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/orders/$id",
-        "/stores/$id",
+        "/stores/$slug",
         "/login/",
         "/merchants/",
         "/orders/",
@@ -363,8 +363,8 @@ export const routeTree = rootRoute
     "/orders/$id": {
       "filePath": "orders/$id.tsx"
     },
-    "/stores/$id": {
-      "filePath": "stores/$id.tsx"
+    "/stores/$slug": {
+      "filePath": "stores/$slug.tsx"
     },
     "/login/": {
       "filePath": "login/index.tsx"
