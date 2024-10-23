@@ -1,14 +1,10 @@
-import { RoutesState } from '@/states/route.state';
-import { getRouteApi } from '@tanstack/react-router';
-import { Card, Collapse } from 'antd';
-import React, { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil';
-import CreateForm from './components/CreateForm';
-
-const routeApi = getRouteApi("/product/create");
+import { RoutesState } from "@/states/route.state";
+import { Card } from "antd";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import CreateForm from "./components/CreateForm";
 
 const CreateProduct = () => {
-
   const setRoutesPath = useSetRecoilState(RoutesState);
 
   useEffect(() => {
@@ -30,7 +26,7 @@ const CreateProduct = () => {
         <CreateForm />
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default CreateProduct
+export default CreateProduct;
