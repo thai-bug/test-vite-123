@@ -39,7 +39,7 @@ const StorageLabelGeneralInfo: FC<StorageLabelGeneralInfoProps> = ({
       <div className="flex gap-2">
         <div className="font-semibold">Storage: </div>{" "}
         <Typography.Link
-          href={`/fulfillment/inbound/storages/${data?.storage?.code}`}
+          href={`/fulfillment/storages/${data?.storage?.code}`}
           target="_blank"
           copyable
         >

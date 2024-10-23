@@ -16,14 +16,14 @@ const useMenu = () => {
         icon: <HddOutlined />,
         items: [
           {
+            itemKey: "storages",
+            text: "Storages",
+            path: "/fulfillment/storages",
+          },
+          {
             itemKey: "inbound",
             text: "Inbound",
             items: [
-              {
-                itemKey: "storages",
-                text: "Storages",
-                path: "/fulfillment/inbound/storages",
-              },
               {
                 itemKey: "storage-labels",
                 text: "Storage Labels",
@@ -36,9 +36,14 @@ const useMenu = () => {
             text: "Outbound",
             items: [
               {
-                itemKey: "picking-job",
-                text: "Picking Job",
-                path: "/fulfillment/outbound/picking-job",
+                itemKey: "picking-jobs",
+                text: "Picking Jobs",
+                path: "/fulfillment/outbound/picking-jobs",
+              },
+              {
+                itemKey: "packing-jobs",
+                text: "Packing Jobs",
+                path: "/fulfillment/outbound/packing-jobs",
               },
             ],
           },

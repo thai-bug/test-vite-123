@@ -25,7 +25,6 @@ const StorageLabelDetail = () => {
         name: "Storage Labels",
       },
       {
-        path: `/fulfillment/inbound/storage-labels/${data?.code}`,
         name: code,
       },
     ]);
