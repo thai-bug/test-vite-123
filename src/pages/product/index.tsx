@@ -12,10 +12,10 @@ import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import DeleteModal from './components/Delete';
 
 
-const routeApi = getRouteApi("/product/");
+const routeApi = getRouteApi("/products/");
 
 
-const Product = () => {
+const Products = () => {
   const queries: IQuery = routeApi.useSearch();
   const setRoutesPath = useSetRecoilState(RoutesState);
   const navigate = routeApi.useNavigate()
@@ -29,7 +29,7 @@ const Product = () => {
         key: "id",
         render: (text, record) => (
           <Link
-            to={`/product/${record?.id}`}
+            to={`/products/${record?.id}`}
             target="_blank"
           >
             {text}
@@ -81,7 +81,7 @@ const Product = () => {
   return (
     <Card title="Product">
       <div className='flex justify-between items-center w-full'>
-        <Link to='/product/create'>
+        <Link to='/products/create'>
           <Button icon={<PlusOutlined />}>
             Create Product
           </Button>
@@ -136,4 +136,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default Products

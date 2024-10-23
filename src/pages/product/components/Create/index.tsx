@@ -14,11 +14,11 @@ const CreateProduct = () => {
   useEffect(() => {
     setRoutesPath([
       {
-        path: "/product",
+        path: "/products/",
         name: "Product",
       },
       {
-        path: `/product/create`,
+        path: `/products/create`,
         name: "Create",
       },
     ]);
