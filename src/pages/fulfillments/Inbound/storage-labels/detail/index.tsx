@@ -1,16 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { getStorageLabelDetail } from "@/services/storage-label/storage-label.api";
-
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { Button, Card, Collapse } from "antd";
+import { Button, Card, Collapse, Image } from "antd";
 import { RoutesState } from "@/states/route.state";
 import StorageLabelHistoryTable from "./components/StorageLabelHistoryTable";
 import StorageLabelGeneralInfo from "./components/StorageLabelGeneralInfo";
-import { IStorageLabel } from "@/services/storage-label/storage-label.type";
 import { FFMStatus } from "@/utils/enums/ffm";
 import AssignProductModal from "./components/AssignProductModal";
+import { useStorageLabelDetailQuery } from "@/hooks/storage-label";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/$code");
 
@@ -19,10 +16,7 @@ const StorageLabelDetail = () => {
   const setRoutesPath = useSetRecoilState(RoutesState);
   const [showAssignProduct, setShowAssignProduct] = useState(false);
 
-  const { data, isLoading } = useQuery<IStorageLabel>({
-    queryKey: ["storage-label-detail", code],
-    queryFn: () => getStorageLabelDetail(code),
-  });
+  const { data, isLoading, refetch } = useStorageLabelDetailQuery({ code });
 
   useEffect(() => {
     setRoutesPath([
@@ -48,13 +42,30 @@ const StorageLabelDetail = () => {
           </div>
         )}
 
-        <Collapse activeKey={["info", "histories"]}>
+        <Collapse activeKey={["info", "images", "histories"]}>
           <Collapse.Panel
             key={"info"}
             header={<div className="font-semibold">General Info</div>}
           >
             <StorageLabelGeneralInfo data={data} />
           </Collapse.Panel>
+
+          <Collapse.Panel
+            key={"images"}
+            header={<div className="font-semibold">Images</div>}
+          >
+            {data?.images?.map((item: string, index) => (
+              <Image
+                key={index}
+                src={item}
+                width={100}
+                height={100}
+                preview
+                alt={`image-${index}`}
+              />
+            ))}
+          </Collapse.Panel>
+
           <Collapse.Panel
             key={"histories"}
             header={<div className="font-semibold">History</div>}
@@ -67,7 +78,10 @@ const StorageLabelDetail = () => {
       <AssignProductModal
         open={showAssignProduct}
         data={data}
-        onOk={() => setShowAssignProduct(false)}
+        onOk={() => {
+          setShowAssignProduct(false);
+          refetch();
+        }}
         onCancel={() => setShowAssignProduct(false)}
       />
     </>
