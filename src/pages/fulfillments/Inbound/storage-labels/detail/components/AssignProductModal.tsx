@@ -104,7 +104,7 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
 
   const onSubmit = (data: IAssignProductForm) => {
     data.images = files.map((item) => item.url) as unknown as string[];
-    console.log(data.images);
+
     assignProductMutate.mutate(data);
   };
 

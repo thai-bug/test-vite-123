@@ -24,7 +24,6 @@ const StoragesPage = () => {
         title: "Code",
         dataIndex: "code",
         render: (value) => {
-          console.log("joajsdofoasdf", value);
           return (
             <Link to={`/fulfillment/inbound/storages/${value}`} target="_blank">
               {value}

@@ -34,7 +34,6 @@ function UploadImage({ fileList, setFileList, accept }: IProps) {
       ]);
     },
     onSuccess: (res, variables) => {
-      console.log("🚀 ~ UploadImage ~ res:", res);
       const data: any = variables.get("file");
       const temp = [...(fileList || [])];
       const index = temp.findIndex((item) => item.uid === data.uid);
