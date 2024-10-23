@@ -1,24 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createProduct } from '@/services/product/product'
-import { PlusOutlined } from '@ant-design/icons'
-import { useMutation } from '@tanstack/react-query'
-import { Button, Col, Input, InputNumber, Row, Upload, Form as AntForm, Layout, Form } from 'antd';
-import TextArea from 'antd/es/input/TextArea'
-import { useForm, Controller } from 'react-hook-form'
-import toast from 'react-hot-toast'
+import { createProduct } from "@/services/product/product";
+import { PlusOutlined } from "@ant-design/icons";
+import { useMutation } from "@tanstack/react-query";
+import {
+  Button,
+  Col,
+  Input,
+  InputNumber,
+  Row,
+  Upload,
+  Form as AntForm,
+  Form,
+} from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { useForm, Controller } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const CreateForm = () => {
-
   const { control, handleSubmit } = useForm(); // Use react-hook-form
   const createProductMutate = useMutation({
     mutationKey: ["createProduct"],
     mutationFn: createProduct,
     onSuccess: () => {
-      toast.success("Create product successfully!")
+      toast.success("Create product successfully!");
     },
     onError: () => {
-      toast.error("Create product failed!")
-    }
+      toast.error("Create product failed!");
+    },
   });
 
   const onFinish = (data: any) => {
@@ -26,10 +34,10 @@ const CreateForm = () => {
   };
 
   return (
-    <Form onFinish={handleSubmit(onFinish)} layout='vertical'>
+    <Form onFinish={handleSubmit(onFinish)} layout="vertical">
       <AntForm.Item>
         <Upload action="/upload.do" listType="picture-card">
-          <button style={{ border: 0, background: 'none' }} type="button">
+          <button style={{ border: 0, background: "none" }} type="button">
             <PlusOutlined />
             <div style={{ marginTop: 8 }}>Upload</div>
           </button>
@@ -42,7 +50,9 @@ const CreateForm = () => {
               name="name"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => <Input {...field} placeholder="Product Name" />}
+              render={({ field }) => (
+                <Input {...field} placeholder="Product Name" />
+              )}
             />
           </AntForm.Item>
         </Col>
@@ -55,11 +65,7 @@ const CreateForm = () => {
               rules={{ required: true }}
               defaultValue={1}
               render={({ field }) => (
-                <InputNumber
-                  {...field}
-                  min={1}
-                  style={{ width: '100%' }}
-                />
+                <InputNumber {...field} min={1} style={{ width: "100%" }} />
               )}
             />
           </AntForm.Item>
@@ -72,11 +78,11 @@ const CreateForm = () => {
           render={({ field }) => <TextArea {...field} rows={4} />}
         />
       </AntForm.Item>
-      <div className='flex justify-end'>
+      <div className="flex justify-end">
         <Button
-          htmlType='submit'
-          type='primary'
-          className='font-bold'
+          htmlType="submit"
+          type="primary"
+          className="font-bold"
           loading={createProductMutate?.isPending}
         >
           Create

@@ -1,25 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useQuery } from '@tanstack/react-query'
-import { getProducts } from '@/services/product/product'
-import { IQuery } from '@/utils/models';
-import { getRouteApi, Link } from '@tanstack/react-router';
-import Table, { ColumnsType } from 'antd/es/table';
-import { useEffect, useMemo, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { RoutesState } from '@/states/route.state';
-import { Button, Card, Divider, Input } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import DeleteModal from './components/Delete';
-
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "@/services/product/product";
+import { IQuery } from "@/utils/models";
+import { getRouteApi, Link } from "@tanstack/react-router";
+import Table, { ColumnsType } from "antd/es/table";
+import { useEffect, useMemo, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { RoutesState } from "@/states/route.state";
+import { Button, Card, Divider, Input } from "antd";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import DeleteModal from "./components/Delete";
 
 const routeApi = getRouteApi("/products/");
-
 
 const Products = () => {
   const queries: IQuery = routeApi.useSearch();
   const setRoutesPath = useSetRecoilState(RoutesState);
-  const navigate = routeApi.useNavigate()
-  const [showModal, setShowModal] = useState(false)
+  const navigate = routeApi.useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   const columns: ColumnsType = useMemo(() => {
     return [
@@ -28,10 +25,7 @@ const Products = () => {
         dataIndex: "id",
         key: "id",
         render: (text, record) => (
-          <Link
-            to={`/products/${record?.id}`}
-            target="_blank"
-          >
+          <Link to={`/products/${record?.id}`} target="_blank">
             {text}
           </Link>
         ),
@@ -39,17 +33,17 @@ const Products = () => {
       {
         title: "Name",
         dataIndex: "name",
-        key: "name"
+        key: "name",
       },
       {
         title: "Status",
         dataIndex: "status",
-        key: "status"
+        key: "status",
       },
       {
         title: "Weight (Kg)",
         dataIndex: "weight",
-        key: "weight"
+        key: "weight",
       },
       {
         title: "Action",
@@ -59,10 +53,10 @@ const Products = () => {
             style={{ cursor: "pointer", color: "red" }}
             onClick={() => setShowModal(true)}
           />
-        )
-      }
-    ]
-  }, [])
+        ),
+      },
+    ];
+  }, []);
 
   useEffect(() => {
     setRoutesPath([
@@ -74,17 +68,15 @@ const Products = () => {
   }, [setRoutesPath]);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['products', queries],
-    queryFn: () => getProducts(queries)
-  })
+    queryKey: ["products", queries],
+    queryFn: () => getProducts(queries),
+  });
 
   return (
     <Card title="Product">
-      <div className='flex justify-between items-center w-full'>
-        <Link to='/products/create'>
-          <Button icon={<PlusOutlined />}>
-            Create Product
-          </Button>
+      <div className="flex justify-between items-center w-full">
+        <Link to="/products/create">
+          <Button icon={<PlusOutlined />}>Create Product</Button>
         </Link>
         <Input.Search
           allowClear
@@ -106,7 +98,7 @@ const Products = () => {
       </div>
       <Divider />
       <Table
-        className='text-center'
+        className="text-center"
         rowKey={"id"}
         columns={columns}
         dataSource={data?.data || []}
@@ -132,8 +124,8 @@ const Products = () => {
         onOk={() => setShowModal(false)}
         onCancel={() => setShowModal(false)}
       />
-    </Card >
-  )
-}
+    </Card>
+  );
+};
 
-export default Products
+export default Products;
