@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { Modal } from 'antd';
-import { useMutation } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
-import { deleteProduct } from '@/services/product/product';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useRef } from "react";
+import { Modal } from "antd";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { deleteProduct } from "@/services/product/product";
 
 interface DeleteModalProps {
   open: boolean;
@@ -11,7 +12,6 @@ interface DeleteModalProps {
 }
 
 const DeleteModal: React.FC<DeleteModalProps> = ({ open, onOk, onCancel }) => {
-
   const submitRef = useRef<HTMLButtonElement>(null);
 
   const deleteProductMutate = useMutation({
@@ -19,16 +19,16 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onOk, onCancel }) => {
     mutationFn: deleteProduct,
     onSuccess: () => {
       onOk?.();
-      toast.success("Delete product successfully !")
+      toast.success("Delete product successfully !");
     },
     onError: () => {
-      toast.error("Delete product failed !")
-    }
-  })
+      toast.error("Delete product failed !");
+    },
+  });
 
   const onSubmit = (id: any) => {
     deleteProductMutate.mutate(id);
-  }
+  };
   return (
     <Modal
       title="Warning"
@@ -38,10 +38,13 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onOk, onCancel }) => {
       okText="Delete"
       cancelText="Cancel"
     >
-      <p>
-        Do you want to delete this product ?
-      </p>
-      <button type="submit" ref={submitRef} className="hidden" onClick={onSubmit} />
+      <p>Do you want to delete this product ?</p>
+      <button
+        type="submit"
+        ref={submitRef}
+        className="hidden"
+        onClick={onSubmit}
+      />
     </Modal>
   );
 };
