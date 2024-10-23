@@ -1,34 +1,54 @@
 import StatusFFMTag from "@/components/helpers/StatusFFMTag";
-import { useStoragesQuery } from "@/hooks/storage";
-import { IStorage } from "@/services/storage/storage.type";
-import { IWarehouse } from "@/services/warehouse/warehouse.type";
+import { usePackingJobsQuery } from "@/hooks/packing-job";
+import { IPackingJob } from "@/services/packing-job/packing-job.type";
+import { RoutesState } from "@/states/route.state";
 import { dayjs } from "@/utils/dayjs";
 import { FFMStatus } from "@/utils/enums/ffm";
 import { IQuery } from "@/utils/models";
-import { getRouteApi, Link } from "@tanstack/react-router";
-import { Card, Divider, Input, Table } from "antd";
+import { getRouteApi } from "@tanstack/react-router";
+import { Card, Divider, Input, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useSetRecoilState } from "recoil";
 
-const routeApi = getRouteApi("/fulfillment/inbound/storages/");
+const routeApi = getRouteApi("/fulfillment/outbound/packing-jobs/");
 
-const StoragesPage = () => {
+const PackingJobsPage = () => {
   const queries: IQuery = routeApi.useSearch();
   const navigate = routeApi.useNavigate();
+  const setRoutesPath = useSetRecoilState(RoutesState);
 
-  const { data, isLoading } = useStoragesQuery({ queries });
+  const { data, isLoading } = usePackingJobsQuery({ queries });
 
-  const columns: ColumnsType<IStorage> = useMemo(() => {
+  const columns: ColumnsType<IPackingJob> = useMemo(() => {
     return [
       {
         title: "Code",
         dataIndex: "code",
         render: (value) => {
           return (
-            <Link to={`/fulfillment/inbound/storages/${value}`} target="_blank">
+            <Typography.Link
+              href={`/fulfillment/outbound/packing-jobs/${value}`}
+              target="_blank"
+              copyable
+            >
               {value}
-            </Link>
+            </Typography.Link>
           );
+        },
+      },
+      {
+        title: "Shipping Code",
+        dataIndex: "shippingCode",
+        render: (value) => {
+          return <Typography.Text copyable>{value}</Typography.Text>;
+        },
+      },
+      {
+        title: "Package code",
+        dataIndex: "packageCode",
+        render: (value) => {
+          return <Typography.Text copyable>{value}</Typography.Text>;
         },
       },
       {
@@ -36,20 +56,6 @@ const StoragesPage = () => {
         dataIndex: "status",
         render: (value: FFMStatus) => {
           return <StatusFFMTag status={value} />;
-        },
-      },
-      {
-        title: "Warehouse",
-        dataIndex: "warehouse",
-        render: (value: IWarehouse) => {
-          return (
-            <Link
-              to={`/fulfillment/inbound/warehouses/${value.id}`}
-              target="_blank"
-            >
-              {value?.name}
-            </Link>
-          );
         },
       },
       {
@@ -62,14 +68,22 @@ const StoragesPage = () => {
     ];
   }, []);
 
+  useEffect(() => {
+    setRoutesPath([
+      {
+        name: "PackingJobs",
+      },
+    ]);
+  }, [setRoutesPath]);
+
   return (
-    <Card title="Storages">
+    <Card title="PackingJobs">
       <div>
         {/* <Button
         onClick={() => setOpenCreateModal(true)}
         icon={<PlusOutlined />}
       >
-        Create Storage Labels
+        Create PackingJob Labels
       </Button> */}
       </div>
       <div className="flex justify-end">
@@ -113,7 +127,7 @@ const StoragesPage = () => {
           current: Number(queries?.page) || 1,
         }}
       />
-      {/* <CreateStorageLabelsModal
+      {/* <CreatePackingJobLabelsModal
       open={openCreateModal}
       onOk={() => {
         setOpenCreateModal(false);
@@ -125,4 +139,4 @@ const StoragesPage = () => {
   );
 };
 
-export default StoragesPage;
+export default PackingJobsPage;

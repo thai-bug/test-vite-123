@@ -1,10 +1,13 @@
-import { getStorageLabelHistories } from "@/services/storage-label/storage-label.api";
+import StatusFFMTag from "@/components/helpers/StatusFFMTag";
+import { IPickingJob } from "@/services/picking-job/picking-job.type";
+import { getStorageLabelHistories } from "@/services/storage-label-history/storage-label-history.api";
 import {
   IStorageLabel,
   IStorageLabelHistory,
 } from "@/services/storage-label/storage-label.type";
 import { dayjs } from "@/utils/dayjs";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { FC, useMemo } from "react";
@@ -54,6 +57,22 @@ const StorageLabelHistoriesTable: FC<StorageLabelHistoriesTableProps> = ({
         title: "Status",
         dataIndex: "status",
         key: "status",
+        render: (value) => <StatusFFMTag status={value} />,
+      },
+      {
+        title: "Picking job",
+        dataIndex: "pickingJob",
+        key: "pickingJob",
+        render: (value: IPickingJob) => {
+          return (
+            <Link
+              to={`/fulfillment/outbound/picking-jobs/${value?.code}`}
+              target="_blank"
+            >
+              {value?.code}
+            </Link>
+          );
+        },
       },
       {
         title: "Created At",

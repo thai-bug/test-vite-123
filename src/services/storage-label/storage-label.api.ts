@@ -24,17 +24,6 @@ export const createStorageLabels = async (data: { quantity: string }) => {
   return response?.data;
 };
 
-export const getStorageLabelHistories = async (payload: any) => {
-  const response = await httpClient.get(
-    `/api/v1/ffm/inbound/storage-labels/${payload.storageLabelCode}/histories`,
-    {
-      params: payload,
-    }
-  );
-
-  return response.data;
-};
-
 export const assignProductToStorageLabel = async (payload: any) => {
   const response = await httpClient.post(
     `/api/v1/ffm/inbound/storage-labels/product`,

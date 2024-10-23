@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IBaseTableProps<T> {
   data?: T[];
   total?: number;
@@ -7,4 +8,5 @@ export interface IBaseTableProps<T> {
   isLoading?: boolean;
   limit?: number;
   page?: number;
+  queries?: any;
 }

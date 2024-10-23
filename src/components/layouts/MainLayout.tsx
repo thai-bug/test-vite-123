@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useEffect } from "react";
-import { UserSwitchOutlined } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { CaretRightOutlined, UserSwitchOutlined } from "@ant-design/icons";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, useRouter } from "@tanstack/react-router";
 import useMenu from "@/hooks/useMenu";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { CollapseStates, OpenKeysStates } from "@/states/menu.state";
 const { Header, Sider, Content } = Layout;
 import { useNavigate } from "@tanstack/react-router";
+import { RoutesState } from "@/states/route.state";
 interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
+  const routePaths = useRecoilValue(RoutesState);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -129,6 +131,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           }}
         ></Header>
         <Content className="mx-auto container p-5 2xl:px-0 py-5">
+          <div className="my-2">
+            <Breadcrumb
+              items={routePaths?.map((item) => {
+                return {
+                  title: item.name,
+                  href: item?.path,
+                };
+              })}
+              separator={<CaretRightOutlined />}
+            />
+          </div>
           {children}
         </Content>
       </Layout>

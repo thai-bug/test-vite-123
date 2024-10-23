@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import StorageGeneralInfo from "./components/StorageGeneralInfo";
 import { useStorageLabelsQuery } from "@/hooks/storage-label";
-import StorageLabelsTable from "../../components/storage-label/StorageLabelsTable";
+import StorageLabelsTable from "../../inbound/components/storage-label/StorageLabelsTable";
 
-const routeApi = getRouteApi("/fulfillment/inbound/storages/$code");
+const routeApi = getRouteApi("/fulfillment/storages/$code");
 
 const StorageDetail = () => {
   const { code } = routeApi.useParams();
@@ -29,11 +29,10 @@ const StorageDetail = () => {
   useEffect(() => {
     setRoutesPath([
       {
-        path: "/fulfillment/inbound/storages",
+        path: "/fulfillment/storages",
         name: "Storages",
       },
       {
-        path: `/fulfillment/inbound/storages/${code}`,
         name: code,
       },
     ]);
@@ -71,13 +70,6 @@ const StorageDetail = () => {
             isLoading={isLoadingStorageLabels}
           />
         </Collapse.Panel>
-        {/*
-        <Collapse.Panel
-          key={"histories"}
-          header={<div className="font-semibold">History</div>}
-        >
-          <StorageLabelHistoryTable storageLabel={data} />
-        </Collapse.Panel> */}
       </Collapse>
     </Card>
   );

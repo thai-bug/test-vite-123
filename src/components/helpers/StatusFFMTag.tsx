@@ -23,6 +23,12 @@ const StatusFFMTag: FC<StatusFFMTagProps> = ({
       case FFMStatus.AVAILABLE:
         return "Available";
 
+      case FFMStatus.PICKING:
+        return "Picking";
+
+      case FFMStatus.PICKED:
+        return "Picked";
+
       default:
         return "";
     }
@@ -37,6 +43,12 @@ const StatusFFMTag: FC<StatusFFMTagProps> = ({
 
       case FFMStatus.AVAILABLE:
         return "blue";
+
+      case FFMStatus.PICKING:
+        return "orange";
+
+      case FFMStatus.PICKED:
+        return "red";
 
       default:
         return "default";
