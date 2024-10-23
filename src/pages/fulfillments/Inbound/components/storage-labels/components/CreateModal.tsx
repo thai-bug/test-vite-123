@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { Modal, Input } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { createStorageLabels } from "@/services/fulfillment/storage-label";
+import { createStorageLabels } from "@/services/storage-label/storage-label.api";
 import toast from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormController } from "@/components/helpers/FormController";
