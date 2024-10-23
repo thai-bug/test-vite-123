@@ -1,5 +1,5 @@
 import MainLayout from "@/components/layouts/MainLayout";
-import StorageLabelDetail from "@/pages/fulfillments/inbound/storage-labels/detail";
+import StorageLabelDetail from "@/pages/fulfillment/inbound/storage-labels/detail";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
