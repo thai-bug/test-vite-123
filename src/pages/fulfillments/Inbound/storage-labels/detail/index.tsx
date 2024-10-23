@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { Button, Card, Collapse, Image } from "antd";
 import { RoutesState } from "@/states/route.state";
-import StorageLabelHistoryTable from "./components/StorageLabelHistoryTable";
+import StorageLabelHistoryTable from "./components/StorageLabelHistoriesTable";
 import StorageLabelGeneralInfo from "./components/StorageLabelGeneralInfo";
 import { FFMStatus } from "@/utils/enums/ffm";
 import AssignProductModal from "./components/AssignProductModal";

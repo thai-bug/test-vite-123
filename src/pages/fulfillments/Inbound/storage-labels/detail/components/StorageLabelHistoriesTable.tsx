@@ -9,11 +9,11 @@ import { Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { FC, useMemo } from "react";
 
-interface StorageLabelHistoryTableProps {
+interface StorageLabelHistoriesTableProps {
   storageLabel?: IStorageLabel;
 }
 
-const StorageLabelHistoryTable: FC<StorageLabelHistoryTableProps> = ({
+const StorageLabelHistoriesTable: FC<StorageLabelHistoriesTableProps> = ({
   storageLabel,
 }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -87,4 +87,4 @@ const StorageLabelHistoryTable: FC<StorageLabelHistoryTableProps> = ({
   );
 };
 
-export default StorageLabelHistoryTable;
+export default StorageLabelHistoriesTable;
