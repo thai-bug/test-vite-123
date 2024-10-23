@@ -1,6 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { getStorageLabels } from "@/services/storage-label/storage-label.api";
-
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { IQuery } from "@/utils/models";
 import { useEffect, useMemo, useState } from "react";
@@ -10,7 +7,10 @@ import { RoutesState } from "@/states/route.state";
 import { ColumnsType } from "antd/es/table";
 import { dayjs } from "@/utils/dayjs";
 import { PlusOutlined } from "@ant-design/icons";
+import StatusFFMTag from "@/components/helpers/StatusFFMTag";
 import CreateStorageLabelsModal from "./components/CreateModal";
+import { IStorageLabel } from "@/services/storage-label/storage-label.type";
+import { useStorageLabelsQuery } from "@/hooks/storage-label";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storage-labels/");
 
@@ -20,12 +20,9 @@ const StorageLabels = () => {
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const setRoutesPath = useSetRecoilState(RoutesState);
 
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ["storageLabels", queries],
-    queryFn: () => getStorageLabels(queries),
-  });
+  const { data, isLoading, refetch } = useStorageLabelsQuery({ queries });
 
-  const columns: ColumnsType = useMemo(() => {
+  const columns: ColumnsType<IStorageLabel> = useMemo(() => {
     return [
       {
         title: "Code",
@@ -44,12 +41,13 @@ const StorageLabels = () => {
         title: "Status",
         dataIndex: "status",
         key: "status",
+        render: (value) => <StatusFFMTag status={value} />,
       },
       {
         title: "Quantity",
         dataIndex: "quantity",
         key: "quantity",
-        render: (value) => value || 0,
+        render: (value) => value || "N|A",
       },
       {
         title: "Product",

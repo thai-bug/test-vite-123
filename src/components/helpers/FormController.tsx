@@ -29,7 +29,6 @@ export const FormController: FC<FormControllerProps> = ({
   defaultValue,
 }) => {
   const { getFieldState } = useFormContext();
-  console.log("🚀 ~ getFieldState:", getFieldState);
 
   const { error } = getFieldState(name);
 
