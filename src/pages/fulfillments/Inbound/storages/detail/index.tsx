@@ -5,8 +5,8 @@ import { Card, Collapse } from "antd";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import StorageGeneralInfo from "./components/StorageGeneralInfo";
-import StorageLabelsTable from "@/pages/fulfillments/inbound/components/storage-label/StorageLabelsTable";
 import { useStorageLabelsQuery } from "@/hooks/storage-label";
+import StorageLabelsTable from "../../components/storage-label/StorageLabelsTable";
 
 const routeApi = getRouteApi("/fulfillment/inbound/storages/$code");
 
@@ -56,7 +56,7 @@ const StorageDetail = () => {
           <StorageLabelsTable
             isShowCreate={false}
             data={data?.data}
-            onPageChange={(page) => {
+            onPageChange={(page: number) => {
               setStorageLabelQueries((prev) => ({
                 ...prev,
                 page,
