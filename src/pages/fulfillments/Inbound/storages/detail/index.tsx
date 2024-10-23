@@ -20,7 +20,6 @@ const StorageDetail = () => {
     limit: 10,
     page: 1,
   });
-  console.log("🚀 ~ StorageDetail ~ storageLabelQueries:", storageLabelQueries);
 
   const { data, isLoading: isLoadingStorageLabels } = useStorageLabelsQuery({
     queries: storageLabelQueries,
@@ -63,7 +62,7 @@ const StorageDetail = () => {
                 page,
               }));
             }}
-            onSearch={(value) => {
+            onSearch={(value: string) => {
               setStorageLabelQueries((prev) => ({
                 ...prev,
                 search: value,
