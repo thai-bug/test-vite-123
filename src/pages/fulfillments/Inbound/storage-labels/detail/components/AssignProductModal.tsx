@@ -3,7 +3,7 @@ import { IProduct } from "@/services/product/product.type";
 import { assignProductToStorageLabel } from "@/services/storage-label/storage-label.api";
 import { IStorageLabel } from "@/services/storage-label/storage-label.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Input, InputNumber, message, Modal, Select } from "antd";
+import { Input, InputNumber, message, Modal, Select, UploadFile } from "antd";
 import React, { FC, useEffect, useRef } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { useDebounce } from "@uidotdev/usehooks";
@@ -11,6 +11,7 @@ import { IStorage } from "@/services/storage/storage.type";
 import { getStorages } from "@/services/storage/storage.api";
 import { IStore } from "@/services/store/store.type";
 import { getStores } from "@/services/store/store.api";
+import UploadImage from "@/components/helpers/UploadImage";
 
 interface AssignProductModalProps {
   onOk?: () => void;
@@ -47,6 +48,8 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
       images: [],
     },
   });
+
+  const [files, setFiles] = React.useState<UploadFile[]>([]);
 
   const watch = useWatch({ control });
 
@@ -100,14 +103,15 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
   });
 
   const onSubmit = (data: IAssignProductForm) => {
-    console.log("🚀 ~ onSubmit ~ data:", data);
+    data.images = files.map((item) => item.url) as unknown as string[];
+
     assignProductMutate.mutate(data);
   };
 
   useEffect(() => {
     setValue("code", data?.code);
   }, [data?.code, setValue]);
-  console.log("joasdjfojoasdf", errors);
+
   return (
     <Modal
       title={`Assign product to ${data?.code}`}
@@ -166,7 +170,6 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
             </span>
           )}
         </div>
-
         <div>
           <label htmlFor="assign-product-id">
             <div className="font-semibold">
@@ -210,7 +213,6 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
             </span>
           )}
         </div>
-
         <div>
           <label htmlFor="assign-storage-id">
             <div className="font-semibold">
@@ -249,7 +251,6 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
             )}
           />
         </div>
-
         <div>
           <label htmlFor="assign-quantity">
             <div className="font-semibold">
@@ -280,7 +281,8 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
             )}
           />
         </div>
-
+        <UploadImage fileList={files} setFileList={setFiles} accept="image/*" />
+        ,
         <div>
           <label htmlFor="assign-reason">
             <div className="font-semibold">Reason: </div>
@@ -304,7 +306,6 @@ const AssignProductModal: FC<AssignProductModalProps> = ({
             )}
           />
         </div>
-
         <button ref={submitRef} className="hidden">
           Assign
         </button>

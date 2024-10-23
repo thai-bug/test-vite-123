@@ -1,11 +1,11 @@
 import MainLayout from "@/components/layouts/MainLayout";
-import StoragesPage from "@/pages/fulfillments/inbound/storages";
+import StorageDetail from "@/pages/fulfillments/inbound/storages/detail";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/fulfillment/inbound/storages/")({
+export const Route = createFileRoute("/fulfillment/inbound/storages/$code")({
   component: () => (
     <MainLayout>
-      <StoragesPage />
+      <StorageDetail />
     </MainLayout>
   ),
 });

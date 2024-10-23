@@ -1,4 +1,4 @@
-import StatusFFMTag from "@/components/status/StatusFFMTag";
+import StatusFFMTag from "@/components/helpers/StatusFFMTag";
 import { IStorageLabel } from "@/services/storage-label/storage-label.type";
 import { dayjs } from "@/utils/dayjs";
 import { Typography } from "antd";
